@@ -12,7 +12,7 @@ gi.require_version("Adw", "1")
 gi.require_version("GdkPixbuf", "2.0")
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk  # noqa: E402
 
-from . import capture, config, keyring_store, notify, pipeline, translate  # noqa: E402
+from . import capture, config, fonts, keyring_store, notify, pipeline, translate  # noqa: E402
 from .i18n import APP_NAME, _  # noqa: E402
 
 APP_ID = "cz.polyweb.LinuxScreenTranslator"
@@ -313,6 +313,18 @@ class PreferencesUI:
         self._lang.connect("notify::selected", self._on_lang)
         group.add(self._lang)
 
+        self._font_row = Adw.ActionRow(title=_("Typeface"))
+        self._font_auto = Gtk.Button(icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER,
+                                     tooltip_text=_("Back to the automatic choice"))
+        self._font_auto.add_css_class("flat")
+        self._font_auto.connect("clicked", self._on_auto_font)
+        choose = Gtk.Button(label=_("Choose…"), valign=Gtk.Align.CENTER)
+        choose.connect("clicked", self._on_choose_font)
+        self._font_row.add_suffix(choose)
+        self._font_row.add_suffix(self._font_auto)
+        group.add(self._font_row)
+        self._refresh_font_row()
+
         self._key = Adw.PasswordEntryRow(title=_("DeepL API key"))
         self._key.set_text(keyring_store.lookup() or self._cfg.get("deepl_api_key", ""))
         self._key.connect("changed", self._on_key_changed)
@@ -364,6 +376,50 @@ class PreferencesUI:
     def _on_lang(self, row, _param):
         self._cfg["target_lang"] = LANGUAGES[row.get_selected()][0]
         config.save(self._cfg)
+        self._refresh_font_row()
+
+    def _refresh_font_row(self):
+        """Say which typeface will be used, and warn when it cannot draw."""
+        target = self._cfg.get("target_lang", "CS")
+        configured = self._cfg.get("font_path", "")
+        path = fonts.for_language(target, configured)
+        name = os.path.basename(path)
+
+        if fonts.can_render(path, fonts.sample_for(target)):
+            origin = _("chosen by hand") if configured else _("picked for the target language")
+            self._font_row.set_subtitle(f"{name} — {origin}")
+        else:
+            # Worth spelling out: a font without the glyphs does not fail, it
+            # quietly draws empty boxes.
+            self._font_row.set_subtitle("⚠ " + _(
+                "{font} has no glyphs for this language — the text would come "
+                "out as empty boxes").format(font=name))
+        self._font_auto.set_sensitive(bool(configured))
+
+    def _on_auto_font(self, _button):
+        self._cfg["font_path"] = ""
+        config.save(self._cfg)
+        self._refresh_font_row()
+
+    def _on_choose_font(self, _button):
+        dialog = Gtk.FileDialog(title=_("Choose a typeface"))
+        filters = Gio.ListStore.new(Gtk.FileFilter)
+        font_filter = Gtk.FileFilter(name=_("Fonts"))
+        for pattern in ("*.ttf", "*.otf", "*.ttc"):
+            font_filter.add_pattern(pattern)
+        filters.append(font_filter)
+        dialog.set_filters(filters)
+
+        def done(source, task):
+            try:
+                path = source.open_finish(task).get_path()
+            except GLib.Error:
+                return  # cancelled
+            self._cfg["font_path"] = path
+            config.save(self._cfg)
+            self._refresh_font_row()
+
+        dialog.open(self._font_row.get_root(), None, done)
 
     def _on_switch(self, row, _param, key):
         self._cfg[key] = row.get_active()

@@ -71,7 +71,7 @@ msgstr "Uložit originál"
 msgid "Save both"
 msgstr "Uložit obojí"
 
-#: linux_screen_translator/app.py:388
+#: linux_screen_translator/app.py:444
 msgid "Checking…"
 msgstr "Ověřuji…"
 
@@ -80,7 +80,7 @@ msgid "Show the original (hold space)"
 msgstr "Zobrazit původní snímek (podrž mezerník)"
 
 #: linux_screen_translator/app.py:80
-#: linux_screen_translator/app.py:412
+#: linux_screen_translator/app.py:468
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -114,42 +114,70 @@ msgid "Target language"
 msgstr "Cílový jazyk"
 
 #: linux_screen_translator/app.py:316
+msgid "Typeface"
+msgstr "Písmo"
+
+#: linux_screen_translator/app.py:318
+msgid "Back to the automatic choice"
+msgstr "Zpět na automatický výběr"
+
+#: linux_screen_translator/app.py:321
+msgid "Choose…"
+msgstr "Vybrat…"
+
+#: linux_screen_translator/app.py:328
 msgid "DeepL API key"
 msgstr "DeepL API klíč"
 
-#: linux_screen_translator/app.py:325
+#: linux_screen_translator/app.py:337
 msgid "Check the key and refresh the quota"
 msgstr "Ověřit klíč a načíst zbývající limit"
 
-#: linux_screen_translator/app.py:330
+#: linux_screen_translator/app.py:342
 msgid "Monthly quota"
 msgstr "Měsíční limit"
 
-#: linux_screen_translator/app.py:331
+#: linux_screen_translator/app.py:343
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr "Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru."
 
-#: linux_screen_translator/app.py:344
+#: linux_screen_translator/app.py:356
 msgid "Behaviour"
 msgstr "Chování"
 
-#: linux_screen_translator/app.py:347
+#: linux_screen_translator/app.py:359
 msgid "Erase the original text"
 msgstr "Vymazat původní text"
 
-#: linux_screen_translator/app.py:348
+#: linux_screen_translator/app.py:360
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr "Dopočítá pozadí pod textem. Vypnuté se překlad píše přes originál."
 
-#: linux_screen_translator/app.py:356
+#: linux_screen_translator/app.py:368
 msgid "Keep the captures"
 msgstr "Ponechat pořízené snímky"
 
-#: linux_screen_translator/app.py:357
+#: linux_screen_translator/app.py:369
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
 
-#: linux_screen_translator/app.py:384
+#: linux_screen_translator/app.py:389
+msgid "chosen by hand"
+msgstr "vybráno ručně"
+
+#: linux_screen_translator/app.py:389
+msgid "picked for the target language"
+msgstr "zvoleno podle cílového jazyka"
+
+#: linux_screen_translator/app.py:405
+msgid "Choose a typeface"
+msgstr "Výběr písma"
+
+#: linux_screen_translator/app.py:407
+msgid "Fonts"
+msgstr "Písma"
+
+#: linux_screen_translator/app.py:440
 #: linux_screen_translator/translate.py:192
 msgid "Enter a key to see the remaining quota."
 msgstr "Zadej klíč a uvidíš zbývající limit."
@@ -180,9 +208,13 @@ msgstr "Rozpoznaný text — {summary}"
 msgid "Saved to {path}"
 msgstr "Uloženo do {path}"
 
-#: linux_screen_translator/app.py:427
+#: linux_screen_translator/app.py:483
 msgid "Settings — {name}"
 msgstr "Nastavení — {name}"
+
+#: linux_screen_translator/app.py:394
+msgid "{font} has no glyphs for this language — the text would come out as empty boxes"
+msgstr "{font} pro tento jazyk nemá znaky — text by vyšel jako prázdné rámečky"
 
 #: linux_screen_translator/cli.py:12
 msgid "image to process; without it the screen is captured"
@@ -220,7 +252,7 @@ msgstr "Překladač obrazovky pro Linux"
 msgid "Recognising text…"
 msgstr "Rozpoznávám text…"
 
-#: linux_screen_translator/pipeline.py:53
+#: linux_screen_translator/pipeline.py:58
 msgid "Rendering the translation…"
 msgstr "Vykresluji překlad…"
 
