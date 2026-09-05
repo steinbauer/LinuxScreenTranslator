@@ -12,7 +12,7 @@ def main(argv=None):
     parser.add_argument("--image", help=_("image to process; without it the screen is captured"))
     parser.add_argument("--out", default="translated.png", help=_("where to write the result"))
     parser.add_argument("--lang", help=_("target language, e.g. CS"))
-    parser.add_argument("--translator", choices=["deepl", "mock"])
+    parser.add_argument("--translator", choices=["deepl", "offline", "mock"])
     parser.add_argument("--no-inpaint", action="store_true",
                         help=_("keep the original text instead of erasing it"))
     args = parser.parse_args(argv)

@@ -12,7 +12,8 @@ gi.require_version("Adw", "1")
 gi.require_version("GdkPixbuf", "2.0")
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk  # noqa: E402
 
-from . import autostart, capture, config, fonts, keyring_store, notify, pipeline, translate  # noqa: E402
+from . import (autostart, capture, config, fonts, keyring_store, notify,  # noqa: E402
+               offline, pipeline, translate)
 from .i18n import APP_NAME, _  # noqa: E402
 
 APP_ID = "cz.polyweb.LinuxScreenTranslator"
@@ -26,6 +27,8 @@ LANGUAGES = [
 ]
 
 MAX_WINDOW = (1500, 950)
+
+SERVICES = [("deepl", _("DeepL (online)")), ("offline", _("Offline, on this machine"))]
 
 
 def texture_from_pil(image):
@@ -313,6 +316,22 @@ class PreferencesUI:
         self._lang.connect("notify::selected", self._on_lang)
         group.add(self._lang)
 
+        codes = [code for code, _label in SERVICES]
+        self._service = Adw.ComboRow(
+            title=_("Translation service"),
+            model=Gtk.StringList.new([label for _code, label in SERVICES]),
+        )
+        current_service = self._cfg.get("translator", "deepl")
+        self._service.set_selected(codes.index(current_service) if current_service in codes else 0)
+        self._service.connect("notify::selected", self._on_service)
+        group.add(self._service)
+
+        self._model_row = Adw.ActionRow(title=_("Offline model"))
+        self._model_get = Gtk.Button(label=_("Download"), valign=Gtk.Align.CENTER)
+        self._model_get.connect("clicked", self._on_get_model)
+        self._model_row.add_suffix(self._model_get)
+        group.add(self._model_row)
+
         self._font_row = Adw.ActionRow(title=_("Typeface"))
         self._font_auto = Gtk.Button(icon_name="edit-undo-symbolic", valign=Gtk.Align.CENTER,
                                      tooltip_text=_("Back to the automatic choice"))
@@ -350,7 +369,57 @@ class PreferencesUI:
         # Fill it in on open: how much is left matters before a translation is
         # attempted, not only when someone thinks to press a button.
         self._on_check()
+        self._refresh_service()
         return group
+
+    def _source(self):
+        return self._cfg.get("source_lang") or "EN"
+
+    def _refresh_service(self):
+        """Show only what the chosen service needs."""
+        online = self._cfg.get("translator", "deepl") != "offline"
+        for row in (self._key, self._status_row):
+            row.set_visible(online)
+        self._model_row.set_visible(not online)
+        if online:
+            return
+
+        source, target = self._source(), self._cfg.get("target_lang", "CS")
+        pair = f"{translate.base_lang(source)} → {translate.base_lang(target)}"
+        if offline.is_installed(source, target):
+            self._model_row.set_subtitle(_("{pair} is ready.").format(pair=pair))
+            self._model_get.set_visible(False)
+        else:
+            self._model_row.set_subtitle(
+                _("{pair} is not installed — about 65 MB.").format(pair=pair))
+            self._model_get.set_visible(True)
+
+    def _on_service(self, row, _param):
+        self._cfg["translator"] = SERVICES[row.get_selected()][0]
+        config.save(self._cfg)
+        self._refresh_service()
+
+    def _on_get_model(self, _button):
+        self._model_get.set_sensitive(False)
+        source, target = self._source(), self._cfg.get("target_lang", "CS")
+
+        def worker():
+            try:
+                offline.download(source, target,
+                                 progress=lambda m: GLib.idle_add(self._model_row.set_subtitle, m))
+                GLib.idle_add(finish, None)
+            except translate.TranslationError as exc:
+                GLib.idle_add(finish, str(exc))
+
+        def finish(error):
+            self._model_get.set_sensitive(True)
+            if error:
+                self._model_row.set_subtitle("❌ " + error)
+            else:
+                self._refresh_service()
+            return False
+
+        threading.Thread(target=worker, daemon=True).start()
 
     def _behaviour_group(self):
         group = Adw.PreferencesGroup(title=_("Behaviour"))
@@ -385,6 +454,7 @@ class PreferencesUI:
         self._cfg["target_lang"] = LANGUAGES[row.get_selected()][0]
         config.save(self._cfg)
         self._refresh_font_row()
+        self._refresh_service()
 
     def _refresh_font_row(self):
         """Say which typeface will be used, and warn when it cannot draw."""

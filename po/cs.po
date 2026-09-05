@@ -7,225 +7,253 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: linux_screen_translator/app.py:22
+#: linux_screen_translator/app.py:23
 msgid "Czech"
 msgstr "Čeština"
 
-#: linux_screen_translator/app.py:22
+#: linux_screen_translator/app.py:23
 msgid "Slovak"
 msgstr "Slovenština"
 
-#: linux_screen_translator/app.py:22
+#: linux_screen_translator/app.py:23
 msgid "English (UK)"
 msgstr "Angličtina (UK)"
 
-#: linux_screen_translator/app.py:23
+#: linux_screen_translator/app.py:24
 msgid "English (US)"
 msgstr "Angličtina (US)"
 
-#: linux_screen_translator/app.py:23
+#: linux_screen_translator/app.py:24
 msgid "German"
 msgstr "Němčina"
 
-#: linux_screen_translator/app.py:23
+#: linux_screen_translator/app.py:24
 msgid "Polish"
 msgstr "Polština"
 
-#: linux_screen_translator/app.py:24
+#: linux_screen_translator/app.py:25
 msgid "French"
 msgstr "Francouzština"
 
-#: linux_screen_translator/app.py:24
+#: linux_screen_translator/app.py:25
 msgid "Spanish"
 msgstr "Španělština"
 
-#: linux_screen_translator/app.py:24
+#: linux_screen_translator/app.py:25
 msgid "Italian"
 msgstr "Italština"
 
-#: linux_screen_translator/app.py:25
+#: linux_screen_translator/app.py:26
 msgid "Ukrainian"
 msgstr "Ukrajinština"
 
-#: linux_screen_translator/app.py:25
+#: linux_screen_translator/app.py:26
 msgid "Portuguese"
 msgstr "Portugalština"
 
-#: linux_screen_translator/app.py:25
+#: linux_screen_translator/app.py:26
 msgid "Dutch"
 msgstr "Nizozemština"
 
-#: linux_screen_translator/app.py:239
+#: linux_screen_translator/app.py:31
+msgid "DeepL (online)"
+msgstr "DeepL (online)"
+
+#: linux_screen_translator/app.py:31
+msgid "Offline, on this machine"
+msgstr "Offline, na tomto počítači"
+
+#: linux_screen_translator/app.py:242
 msgid "Copied to clipboard"
 msgstr "Zkopírováno do schránky"
 
-#: linux_screen_translator/app.py:244
+#: linux_screen_translator/app.py:247
 msgid "Save translation"
 msgstr "Uložit překlad"
 
-#: linux_screen_translator/app.py:245
+#: linux_screen_translator/app.py:248
 msgid "Save original"
 msgstr "Uložit originál"
 
-#: linux_screen_translator/app.py:246
+#: linux_screen_translator/app.py:249
 msgid "Save both"
 msgstr "Uložit obojí"
 
-#: linux_screen_translator/app.py:466
+#: linux_screen_translator/app.py:536
 msgid "Checking…"
 msgstr "Ověřuji…"
 
-#: linux_screen_translator/app.py:73
+#: linux_screen_translator/app.py:76
 msgid "Show the original (hold space)"
 msgstr "Zobrazit původní snímek (podrž mezerník)"
 
-#: linux_screen_translator/app.py:80
-#: linux_screen_translator/app.py:490
+#: linux_screen_translator/app.py:83
+#: linux_screen_translator/app.py:560
 msgid "Settings"
 msgstr "Nastavení"
 
-#: linux_screen_translator/app.py:85
+#: linux_screen_translator/app.py:88
 msgid "Save… (Ctrl+S)"
 msgstr "Uložit… (Ctrl+S)"
 
-#: linux_screen_translator/app.py:92
+#: linux_screen_translator/app.py:95
 msgid "Copy to clipboard (Ctrl+C)"
 msgstr "Kopírovat do schránky (Ctrl+C)"
 
-#: linux_screen_translator/app.py:117
+#: linux_screen_translator/app.py:120
 msgid "Translating…"
 msgstr "Překládám…"
 
-#: linux_screen_translator/app.py:162
-#: linux_screen_translator/app.py:129
+#: linux_screen_translator/app.py:165
+#: linux_screen_translator/app.py:132
 msgid "Nothing to translate"
 msgstr "Není co překládat"
 
-#: linux_screen_translator/app.py:163
+#: linux_screen_translator/app.py:166
 msgid "The text found is already in the target language."
 msgstr "Nalezený text už je v cílovém jazyce."
 
-#: linux_screen_translator/app.py:304
+#: linux_screen_translator/app.py:307
 msgid "Translation"
 msgstr "Překlad"
 
-#: linux_screen_translator/app.py:308
+#: linux_screen_translator/app.py:311
 msgid "Target language"
 msgstr "Cílový jazyk"
 
-#: linux_screen_translator/app.py:316
+#: linux_screen_translator/app.py:321
+msgid "Translation service"
+msgstr "Překladová služba"
+
+#: linux_screen_translator/app.py:329
+msgid "Offline model"
+msgstr "Offline model"
+
+#: linux_screen_translator/app.py:330
+msgid "Download"
+msgstr "Stáhnout"
+
+#: linux_screen_translator/app.py:335
 msgid "Typeface"
 msgstr "Písmo"
 
-#: linux_screen_translator/app.py:318
+#: linux_screen_translator/app.py:337
 msgid "Back to the automatic choice"
 msgstr "Zpět na automatický výběr"
 
-#: linux_screen_translator/app.py:321
+#: linux_screen_translator/app.py:340
 msgid "Choose…"
 msgstr "Vybrat…"
 
-#: linux_screen_translator/app.py:328
+#: linux_screen_translator/app.py:347
 msgid "DeepL API key"
 msgstr "DeepL API klíč"
 
-#: linux_screen_translator/app.py:337
+#: linux_screen_translator/app.py:356
 msgid "Check the key and refresh the quota"
 msgstr "Ověřit klíč a načíst zbývající limit"
 
-#: linux_screen_translator/app.py:342
+#: linux_screen_translator/app.py:361
 msgid "Monthly quota"
 msgstr "Měsíční limit"
 
-#: linux_screen_translator/app.py:343
+#: linux_screen_translator/app.py:362
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr "Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru."
 
-#: linux_screen_translator/app.py:356
+#: linux_screen_translator/app.py:425
 msgid "Behaviour"
 msgstr "Chování"
 
-#: linux_screen_translator/app.py:359
+#: linux_screen_translator/app.py:428
 msgid "Erase the original text"
 msgstr "Vymazat původní text"
 
-#: linux_screen_translator/app.py:360
+#: linux_screen_translator/app.py:429
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr "Dopočítá pozadí pod textem. Vypnuté se překlad píše přes originál."
 
-#: linux_screen_translator/app.py:368
+#: linux_screen_translator/app.py:437
 msgid "Start with the session"
 msgstr "Spouštět po přihlášení"
 
-#: linux_screen_translator/app.py:369
-#: linux_screen_translator/app.py:444
+#: linux_screen_translator/app.py:438
+#: linux_screen_translator/app.py:514
 msgid "Puts the icon back in the top bar after logging in."
 msgstr "Po přihlášení vrátí ikonu do horní lišty."
 
-#: linux_screen_translator/app.py:376
+#: linux_screen_translator/app.py:445
 msgid "Keep the captures"
 msgstr "Ponechat pořízené snímky"
 
-#: linux_screen_translator/app.py:377
+#: linux_screen_translator/app.py:446
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
 
-#: linux_screen_translator/app.py:397
+#: linux_screen_translator/app.py:467
 msgid "chosen by hand"
 msgstr "vybráno ručně"
 
-#: linux_screen_translator/app.py:397
+#: linux_screen_translator/app.py:467
 msgid "picked for the target language"
 msgstr "zvoleno podle cílového jazyka"
 
-#: linux_screen_translator/app.py:413
+#: linux_screen_translator/app.py:483
 msgid "Choose a typeface"
 msgstr "Výběr písma"
 
-#: linux_screen_translator/app.py:415
+#: linux_screen_translator/app.py:485
 msgid "Fonts"
 msgstr "Písma"
 
-#: linux_screen_translator/app.py:462
-#: linux_screen_translator/translate.py:192
+#: linux_screen_translator/app.py:532
+#: linux_screen_translator/translate.py:196
 msgid "Enter a key to see the remaining quota."
 msgstr "Zadej klíč a uvidíš zbývající limit."
 
-#: linux_screen_translator/app.py:130
+#: linux_screen_translator/app.py:133
 #: linux_screen_translator/pipeline.py:35
 msgid "No text was found in the selected area."
 msgstr "Ve vybrané oblasti jsem nenašel žádný text."
 
-#: linux_screen_translator/app.py:133
+#: linux_screen_translator/app.py:136
 msgid "Translation failed"
 msgstr "Překlad se nezdařil"
 
-#: linux_screen_translator/app.py:136
+#: linux_screen_translator/app.py:139
 msgid "Something went wrong"
 msgstr "Něco se pokazilo"
 
-#: linux_screen_translator/app.py:285
+#: linux_screen_translator/app.py:288
 msgid "Saved alongside {path}"
 msgstr "Originál uložen jako {path}"
 
-#: linux_screen_translator/app.py:440
+#: linux_screen_translator/app.py:510
 msgid "Could not change the autostart entry."
 msgstr "Nepodařilo se změnit nastavení spouštění."
 
-#: linux_screen_translator/app.py:195
+#: linux_screen_translator/app.py:198
 msgid "Recognised text — {summary}"
 msgstr "Rozpoznaný text — {summary}"
 
-#: linux_screen_translator/app.py:275
 #: linux_screen_translator/app.py:278
+#: linux_screen_translator/app.py:281
 msgid "Saved to {path}"
 msgstr "Uloženo do {path}"
 
-#: linux_screen_translator/app.py:505
+#: linux_screen_translator/app.py:390
+msgid "{pair} is ready."
+msgstr "{pair} je připraven."
+
+#: linux_screen_translator/app.py:394
+msgid "{pair} is not installed — about 65 MB."
+msgstr "{pair} není nainstalovaný — asi 65 MB."
+
+#: linux_screen_translator/app.py:575
 msgid "Settings — {name}"
 msgstr "Nastavení — {name}"
 
-#: linux_screen_translator/app.py:402
+#: linux_screen_translator/app.py:472
 msgid "{font} has no glyphs for this language — the text would come out as empty boxes"
 msgstr "{font} pro tento jazyk nemá znaky — text by vyšel jako prázdné rámečky"
 
@@ -261,6 +289,46 @@ msgstr "Hotovo — {summary}, uloženo do {path}"
 msgid "Linux Screen Translator"
 msgstr "Překladač obrazovky pro Linux"
 
+#: linux_screen_translator/offline.py:69
+msgid "Looking for a model…"
+msgstr "Hledám model…"
+
+#: linux_screen_translator/offline.py:84
+msgid "Downloading the model…"
+msgstr "Stahuji model…"
+
+#: linux_screen_translator/offline.py:82
+msgid "The model entry carries no download link."
+msgstr "Záznam modelu neobsahuje odkaz ke stažení."
+
+#: linux_screen_translator/offline.py:106
+msgid "Installing the model…"
+msgstr "Instaluji model…"
+
+#: linux_screen_translator/offline.py:104
+msgid "The downloaded model looks empty."
+msgstr "Stažený model je prázdný."
+
+#: linux_screen_translator/offline.py:77
+msgid "No offline model is published for {pair}."
+msgstr "Pro {pair} není publikovaný žádný offline model."
+
+#: linux_screen_translator/offline.py:138
+msgid "Offline translation needs extra packages. Install them with: pip install ctranslate2 subword-nmt"
+msgstr "Offline překlad potřebuje doplňkové balíky. Nainstaluj je příkazem: pip install ctranslate2 subword-nmt"
+
+#: linux_screen_translator/offline.py:60
+msgid "Could not fetch the model list: {error}"
+msgstr "Nepodařilo se načíst seznam modelů: {error}"
+
+#: linux_screen_translator/offline.py:144
+msgid "No offline model for {pair} is installed yet."
+msgstr "Model pro {pair} zatím není nainstalovaný."
+
+#: linux_screen_translator/offline.py:98
+msgid "Downloading the model failed: {error}"
+msgstr "Stažení modelu selhalo: {error}"
+
 #: linux_screen_translator/pipeline.py:31
 msgid "Recognising text…"
 msgstr "Rozpoznávám text…"
@@ -277,19 +345,19 @@ msgstr "{count} bloků za {seconds:.1f} s"
 msgid "Translating {count} blocks…"
 msgstr "Překládám {count} bloků…"
 
-#: linux_screen_translator/translate.py:213
+#: linux_screen_translator/translate.py:217
 msgid "free"
 msgstr "bezplatný"
 
-#: linux_screen_translator/translate.py:213
+#: linux_screen_translator/translate.py:217
 msgid "paid"
 msgstr "placený"
 
-#: linux_screen_translator/translate.py:205
+#: linux_screen_translator/translate.py:209
 msgid "DeepL rejected the key (403). Check that you copied all of it."
 msgstr "DeepL klíč odmítl (403). Zkontroluj, že jsi ho zkopíroval celý."
 
-#: linux_screen_translator/translate.py:214
+#: linux_screen_translator/translate.py:218
 msgid "{used} of {limit} characters used, {left} left ({tier} tier)"
 msgstr "využito {used} z {limit} znaků, zbývá {left} ({tier} tarif)"
 
@@ -305,7 +373,7 @@ msgstr "DeepL klíč odmítl (403). Zkontroluj API klíč."
 msgid "The monthly DeepL quota is used up (456)."
 msgstr "Vyčerpaný měsíční limit DeepL (456)."
 
-#: linux_screen_translator/translate.py:207
+#: linux_screen_translator/translate.py:211
 msgid "DeepL returned {status}."
 msgstr "DeepL vrátil {status}."
 
@@ -313,7 +381,7 @@ msgstr "DeepL vrátil {status}."
 msgid "DeepL returned {status}: {body}"
 msgstr "DeepL vrátil {status}: {body}"
 
-#: linux_screen_translator/translate.py:202
+#: linux_screen_translator/translate.py:206
 msgid "Could not reach DeepL: {error}"
 msgstr "Nepodařilo se spojit s DeepL: {error}"
 

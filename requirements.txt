@@ -4,3 +4,7 @@ rapidocr>=3.9
 opencv-python>=4.9
 Pillow>=10
 requests>=2.31
+
+# Optional: offline translation instead of a paid service. Roughly 140 MB of
+# packages plus 65 MB per language pair, so it is not installed by default.
+#   pip install ctranslate2 subword-nmt sentencepiece

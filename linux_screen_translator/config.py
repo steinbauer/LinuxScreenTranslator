@@ -15,7 +15,7 @@ DEFAULTS = {
     "target_lang": "CS",
     "source_lang": "",           # empty means auto-detect
     "deepl_api_key": "",
-    "translator": "deepl",       # deepl | mock
+    "translator": "deepl",       # deepl | offline | mock
     "inpaint": True,             # erase the original text and fill the background
     "keep_capture": False,       # keep the screenshot in the Screenshots folder
     "font_path": "",            # empty means: pick one for the target language

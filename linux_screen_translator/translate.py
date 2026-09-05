@@ -1,5 +1,6 @@
 """Translation backends: DeepL, plus a mock used to test without a key."""
 
+import unicodedata
 from dataclasses import dataclass
 
 import requests
@@ -28,6 +29,30 @@ TARGET_HINTS = {
             "proti", "bez", "pred", "nad", "pod", "kde", "kdo", "jako",
             "vsak", "ted", "vice", "muze", "musi", "chce", "si", "jen",
             "uzivatel", "uzivatele", "prave", "hlavni", "stranka",
+        },
+    },
+    "ES": {
+        "chars": set("ñÑ¿¡"),
+        "words": {
+            "que", "los", "las", "una", "por", "con", "para", "esta", "pero",
+            "como", "todo", "desde", "cuando", "porque", "sobre", "muy", "del",
+            "ya", "está", "más", "también", "hay",
+        },
+    },
+    "DE": {
+        "chars": set("äöüßÄÖÜ"),
+        "words": {
+            "und", "der", "die", "das", "nicht", "mit", "ist", "ein", "eine",
+            "auch", "aber", "wenn", "wie", "noch", "schon", "werden", "haben",
+            "sich", "einen", "einer", "mehr",
+        },
+    },
+    "FR": {
+        "chars": set("àâçéèêëîïôùûÀÂÇÉÈÊ"),
+        "words": {
+            "que", "les", "des", "une", "pour", "dans", "avec", "est", "sont",
+            "mais", "comme", "tout", "plus", "cette", "être", "fait", "vous",
+            "nous", "sur", "pas",
         },
     },
 }
@@ -82,6 +107,18 @@ def base_lang(code):
     return (code or "").split("-")[0].upper()
 
 
+def fold(text):
+    """Strip accents, so a word matches whether or not it carries them.
+
+    The word lists are written without diacritics. That used to be enough
+    because the recogniser dropped accents anyway; now that it keeps them,
+    both sides have to be folded or nothing matches.
+    """
+    return "".join(
+        ch for ch in unicodedata.normalize("NFKD", text) if not unicodedata.combining(ch)
+    )
+
+
 def looks_like_target(text, target_lang, min_hits=2):
     """Cheap guess whether the text already is in the target language.
 
@@ -93,8 +130,9 @@ def looks_like_target(text, target_lang, min_hits=2):
         return False
     if any(ch in hints["chars"] for ch in text):
         return True
-    words = [w.strip(".,:;!?()[]\"'„“").lower() for w in text.split()]
-    return sum(1 for w in words if w in hints["words"]) >= min_hits
+    wanted = {fold(w) for w in hints["words"]}
+    words = [fold(w.strip(".,:;!?()[]\"'„“").lower()) for w in text.split()]
+    return sum(1 for w in words if w in wanted) >= min_hits
 
 
 class DeepLTranslator:
@@ -178,6 +216,10 @@ class MockTranslator:
 def build(cfg, api_key=None):
     if cfg.get("translator") == "mock":
         return MockTranslator(target_lang=cfg["target_lang"])
+    if cfg.get("translator") == "offline":
+        from .offline import OfflineTranslator
+        return OfflineTranslator(target_lang=cfg["target_lang"],
+                                 source_lang=cfg.get("source_lang") or "EN")
     return DeepLTranslator(
         api_key=api_key or cfg.get("deepl_api_key", ""),
         target_lang=cfg["target_lang"],

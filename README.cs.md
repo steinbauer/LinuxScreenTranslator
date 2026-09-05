@@ -87,6 +87,28 @@ Zadává se tu cílový jazyk a **DeepL API klíč** (zdarma na
 <https://www.deepl.com/pro-api>, bezplatný tarif dává 500 000 znaků měsíčně).
 Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru.
 
+### Překlad bez účtu
+
+Jako alternativa je k dispozici offline překlad, který používá modely Argos
+Translate přes CTranslate2. Nic neopouští počítač a není potřeba účet, klíč
+ani kvóta.
+
+Neinstaluje se automaticky, protože stojí zhruba 140 MB balíků a 65 MB na
+jazykový pár:
+
+```bash
+.venv/bin/pip install ctranslate2 subword-nmt sentencepiece
+```
+
+Pak se v nastavení zvolí „Offline, na tomto počítači“ a stáhne se model pro
+daný pár. Rychlost problém není — model se načte za desetinu sekundy a
+obrazovka textu se přeloží výrazně pod sekundu.
+
+Kvalita ano. Nejvíc je to znát na slangu: *„bro has mastered the art of
+dodging billing“* vyšlo jako *„Bratr ovládl umění vyhýbání se billingu“*,
+kdežto DeepL zvládl *„Kámoš je mistr v tom, jak se vyhnout placení účtů“*. U
+běžných vět je rozdíl malý a u meme nápisů verzálkami byl někdy i lepší.
+
 ## Použití
 
 * `Ctrl+Print`, nebo ikona v liště → *Přeložit oblast…*
@@ -106,6 +128,9 @@ Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru.
   výsledek nerozeznatelný od originálu, přes složitou fotografii zůstane
   rozmazaná stopa. Ostřejší by byl model LaMa za cenu ~200 MB a sekundy navíc.
 * Vícesloupcový text a kurzíva se nerozpoznají.
+* Offline překlad nemá vlastní detekci jazyka, takže text už v cílovém jazyce
+  pozná jen podle seznamu slov, který zatím pokrývá češtinu, španělštinu,
+  němčinu a francouzštinu.
 
 ## Licence
 

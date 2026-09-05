@@ -90,6 +90,29 @@ Set the target language and a **DeepL API key** (free at
 <https://www.deepl.com/pro-api> — the free tier gives 500,000 characters a
 month). The key is stored in the system keyring, not in the config file.
 
+### Translating without an account
+
+Offline translation is available as an alternative, running Argos Translate's
+models through CTranslate2. Nothing leaves the machine, and there is no
+account, key or quota.
+
+It is not installed by default, because it costs roughly 140 MB of packages
+and 65 MB per language pair:
+
+```bash
+.venv/bin/pip install ctranslate2 subword-nmt sentencepiece
+```
+
+Then choose "Offline, on this machine" in the settings and download the model
+for your language pair. Speed is not the trade-off: the model loads in about a
+tenth of a second and a screenful of text translates in well under one.
+
+Quality is. It shows most on slang — *"bro has mastered the art of dodging
+billing"* came back as *"Bratr ovládl umění vyhýbání se billingu"* where DeepL
+managed *"Kámoš je mistr v tom, jak se vyhnout placení účtů"*. On ordinary
+sentences the gap is small, and on shouted meme lettering it was occasionally
+better.
+
 ## Use
 
 * `Ctrl+Print`, or the tray icon → *Translate an area…*
@@ -124,6 +147,9 @@ entry to `TARGET_HINTS` in `linux_screen_translator/translate.py`.
   blurred trace remains. LaMa would be sharper, at the cost of ~200 MB and a
   second of compute.
 * Multi-column text and italics are not detected.
+* Offline translation has no language detection of its own, so text already
+  in the target language is recognised only by a word-list heuristic covering
+  Czech, Spanish, German and French.
 
 ## Licence
 
