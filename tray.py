@@ -16,7 +16,7 @@ gi.require_version("AyatanaAppIndicator3", "0.1")
 from gi.repository import AyatanaAppIndicator3 as AppIndicator, Gtk  # noqa: E402
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from translatorscreener.i18n import APP_NAME, _  # noqa: E402
+from linux_screen_translator.i18n import APP_NAME, _  # noqa: E402
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PYTHON = os.path.join(ROOT, ".venv", "bin", "python")

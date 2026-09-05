@@ -61,8 +61,8 @@ Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru.
 ## Bez grafického rozhraní
 
 ```bash
-.venv/bin/python -m translatorscreener.cli --image snimek.png --out preklad.png
-.venv/bin/python -m translatorscreener.cli --translator mock   # bez API klíče
+.venv/bin/python -m linux_screen_translator.cli --image snimek.png --out preklad.png
+.venv/bin/python -m linux_screen_translator.cli --translator mock   # bez API klíče
 ```
 
 ## Známá omezení

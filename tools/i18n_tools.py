@@ -4,7 +4,7 @@
 Written in plain Python so contributors do not need the gettext tools
 installed just to build a translation.
 
-    python3 tools/i18n_tools.py extract          -> po/translatorscreener.pot
+    python3 tools/i18n_tools.py extract          -> po/linux-screen-translator.pot
     python3 tools/i18n_tools.py compile          -> locale/<lang>/LC_MESSAGES/*.mo
 """
 
@@ -14,8 +14,8 @@ import struct
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOMAIN = "translatorscreener"
-SOURCES = ("translatorscreener", ".")
+DOMAIN = "linux-screen-translator"
+SOURCES = ("linux_screen_translator", ".")
 
 
 def _python_files():

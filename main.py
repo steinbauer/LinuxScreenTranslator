@@ -3,7 +3,7 @@
 
 import sys
 
-from translatorscreener import app
+from linux_screen_translator import app
 
 if __name__ == "__main__":
     sys.exit(app.main())

@@ -64,16 +64,29 @@ update-desktop-database "$APPS" 2>/dev/null || true
 
 echo "==> Binding Ctrl+Print"
 BASE="org.gnome.settings-daemon.plugins.media-keys"
-PATHSPEC="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/translatorscreener/"
-CURRENT="$(gsettings get $BASE custom-keybindings)"
-if [[ "$CURRENT" != *"translatorscreener"* ]]; then
-    if [[ "$CURRENT" == "@as []" || "$CURRENT" == "[]" ]]; then
-        gsettings set $BASE custom-keybindings "['$PATHSPEC']"
-    else
-        gsettings set $BASE custom-keybindings "${CURRENT%]}, '$PATHSPEC']"
-    fi
-fi
-KEY="$BASE.custom-keybinding:$PATHSPEC"
+ROOTPATH="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+NEWPATH="$ROOTPATH/linux-screen-translator/"
+OLDPATH="$ROOTPATH/translatorscreener/"
+
+# Register the new path and drop the pre-rename one, so Ctrl+Print is not
+# claimed twice by two entries pointing at the same program.
+python3 - "$BASE" "$NEWPATH" "$OLDPATH" <<'PY'
+import ast
+import subprocess
+import sys
+
+base, new_path, old_path = sys.argv[1:4]
+current = subprocess.run(["gsettings", "get", base, "custom-keybindings"],
+                         capture_output=True, text=True).stdout.strip()
+paths = [] if current in ("@as []", "[]") else ast.literal_eval(current)
+paths = [p for p in paths if p != old_path]
+if new_path not in paths:
+    paths.append(new_path)
+subprocess.run(["gsettings", "set", base, "custom-keybindings", str(paths)], check=True)
+PY
+dconf reset -f "$OLDPATH" 2>/dev/null || true
+
+KEY="$BASE.custom-keybinding:$NEWPATH"
 gsettings set "$KEY" name "Linux Screen Translator"
 gsettings set "$KEY" command "$VENV/bin/python $ROOT/main.py"
 gsettings set "$KEY" binding "<Control>Print"

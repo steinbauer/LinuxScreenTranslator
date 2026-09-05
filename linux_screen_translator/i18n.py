@@ -7,7 +7,7 @@ live as .po catalogues under po/ and are compiled into locale/ at install time.
 import gettext
 import os
 
-DOMAIN = "translatorscreener"
+DOMAIN = "linux-screen-translator"
 LOCALE_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "locale"
 )

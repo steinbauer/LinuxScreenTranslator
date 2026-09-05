@@ -64,8 +64,8 @@ month). The key is stored in the system keyring, not in the config file.
 ## Without the GUI
 
 ```bash
-.venv/bin/python -m translatorscreener.cli --image shot.png --out result.png
-.venv/bin/python -m translatorscreener.cli --translator mock   # no API key needed
+.venv/bin/python -m linux_screen_translator.cli --image shot.png --out result.png
+.venv/bin/python -m linux_screen_translator.cli --translator mock   # no API key needed
 ```
 
 ## Translating the interface
@@ -74,13 +74,13 @@ English is the source language. Catalogues live in `po/`, and the tools are
 plain Python, so the GNU gettext utilities are not required:
 
 ```bash
-python3 tools/i18n_tools.py extract   # refresh po/translatorscreener.pot
-cp po/translatorscreener.pot po/de.po # then fill in the msgstr lines
+python3 tools/i18n_tools.py extract   # refresh po/linux-screen-translator.pot
+cp po/linux-screen-translator.pot po/de.po # then fill in the msgstr lines
 python3 tools/i18n_tools.py compile   # build locale/*/LC_MESSAGES/*.mo
 ```
 
 To teach the "already in the target language" filter a new language, add an
-entry to `TARGET_HINTS` in `translatorscreener/translate.py`.
+entry to `TARGET_HINTS` in `linux_screen_translator/translate.py`.
 
 ## Known limitations
 

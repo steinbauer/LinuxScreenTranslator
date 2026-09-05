@@ -5,272 +5,272 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: translatorscreener/app.py:22
+#: linux_screen_translator/app.py:22
 msgid "Czech"
 msgstr ""
 
-#: translatorscreener/app.py:22
+#: linux_screen_translator/app.py:22
 msgid "Slovak"
 msgstr ""
 
-#: translatorscreener/app.py:22
+#: linux_screen_translator/app.py:22
 msgid "English (UK)"
 msgstr ""
 
-#: translatorscreener/app.py:23
+#: linux_screen_translator/app.py:23
 msgid "English (US)"
 msgstr ""
 
-#: translatorscreener/app.py:23
+#: linux_screen_translator/app.py:23
 msgid "German"
 msgstr ""
 
-#: translatorscreener/app.py:23
+#: linux_screen_translator/app.py:23
 msgid "Polish"
 msgstr ""
 
-#: translatorscreener/app.py:24
+#: linux_screen_translator/app.py:24
 msgid "French"
 msgstr ""
 
-#: translatorscreener/app.py:24
+#: linux_screen_translator/app.py:24
 msgid "Spanish"
 msgstr ""
 
-#: translatorscreener/app.py:24
+#: linux_screen_translator/app.py:24
 msgid "Italian"
 msgstr ""
 
-#: translatorscreener/app.py:25
+#: linux_screen_translator/app.py:25
 msgid "Ukrainian"
 msgstr ""
 
-#: translatorscreener/app.py:25
+#: linux_screen_translator/app.py:25
 msgid "Portuguese"
 msgstr ""
 
-#: translatorscreener/app.py:25
+#: linux_screen_translator/app.py:25
 msgid "Dutch"
 msgstr ""
 
-#: translatorscreener/app.py:239
+#: linux_screen_translator/app.py:239
 msgid "Copied to clipboard"
 msgstr ""
 
-#: translatorscreener/app.py:244
+#: linux_screen_translator/app.py:244
 msgid "Save translation"
 msgstr ""
 
-#: translatorscreener/app.py:245
+#: linux_screen_translator/app.py:245
 msgid "Save original"
 msgstr ""
 
-#: translatorscreener/app.py:246
+#: linux_screen_translator/app.py:246
 msgid "Save both"
 msgstr ""
 
-#: translatorscreener/app.py:388
+#: linux_screen_translator/app.py:388
 msgid "Checking…"
 msgstr ""
 
-#: translatorscreener/app.py:73
+#: linux_screen_translator/app.py:73
 msgid "Show the original (hold space)"
 msgstr ""
 
-#: translatorscreener/app.py:80
-#: translatorscreener/app.py:412
+#: linux_screen_translator/app.py:80
+#: linux_screen_translator/app.py:412
 msgid "Settings"
 msgstr ""
 
-#: translatorscreener/app.py:85
+#: linux_screen_translator/app.py:85
 msgid "Save… (Ctrl+S)"
 msgstr ""
 
-#: translatorscreener/app.py:92
+#: linux_screen_translator/app.py:92
 msgid "Copy to clipboard (Ctrl+C)"
 msgstr ""
 
-#: translatorscreener/app.py:117
+#: linux_screen_translator/app.py:117
 msgid "Translating…"
 msgstr ""
 
-#: translatorscreener/app.py:162
-#: translatorscreener/app.py:129
+#: linux_screen_translator/app.py:162
+#: linux_screen_translator/app.py:129
 msgid "Nothing to translate"
 msgstr ""
 
-#: translatorscreener/app.py:163
+#: linux_screen_translator/app.py:163
 msgid "The text found is already in the target language."
 msgstr ""
 
-#: translatorscreener/app.py:304
+#: linux_screen_translator/app.py:304
 msgid "Translation"
 msgstr ""
 
-#: translatorscreener/app.py:308
+#: linux_screen_translator/app.py:308
 msgid "Target language"
 msgstr ""
 
-#: translatorscreener/app.py:316
+#: linux_screen_translator/app.py:316
 msgid "DeepL API key"
 msgstr ""
 
-#: translatorscreener/app.py:325
+#: linux_screen_translator/app.py:325
 msgid "Check the key and refresh the quota"
 msgstr ""
 
-#: translatorscreener/app.py:330
+#: linux_screen_translator/app.py:330
 msgid "Monthly quota"
 msgstr ""
 
-#: translatorscreener/app.py:331
+#: linux_screen_translator/app.py:331
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr ""
 
-#: translatorscreener/app.py:344
+#: linux_screen_translator/app.py:344
 msgid "Behaviour"
 msgstr ""
 
-#: translatorscreener/app.py:347
+#: linux_screen_translator/app.py:347
 msgid "Erase the original text"
 msgstr ""
 
-#: translatorscreener/app.py:348
+#: linux_screen_translator/app.py:348
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr ""
 
-#: translatorscreener/app.py:356
+#: linux_screen_translator/app.py:356
 msgid "Keep the captures"
 msgstr ""
 
-#: translatorscreener/app.py:357
+#: linux_screen_translator/app.py:357
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr ""
 
-#: translatorscreener/app.py:384
-#: translatorscreener/translate.py:179
+#: linux_screen_translator/app.py:384
+#: linux_screen_translator/translate.py:179
 msgid "Enter a key to see the remaining quota."
 msgstr ""
 
-#: translatorscreener/app.py:130
-#: translatorscreener/pipeline.py:35
+#: linux_screen_translator/app.py:130
+#: linux_screen_translator/pipeline.py:35
 msgid "No text was found in the selected area."
 msgstr ""
 
-#: translatorscreener/app.py:133
+#: linux_screen_translator/app.py:133
 msgid "Translation failed"
 msgstr ""
 
-#: translatorscreener/app.py:136
+#: linux_screen_translator/app.py:136
 msgid "Something went wrong"
 msgstr ""
 
-#: translatorscreener/app.py:285
+#: linux_screen_translator/app.py:285
 msgid "Saved alongside {path}"
 msgstr ""
 
-#: translatorscreener/app.py:195
+#: linux_screen_translator/app.py:195
 msgid "Recognised text — {summary}"
 msgstr ""
 
-#: translatorscreener/app.py:275
-#: translatorscreener/app.py:278
+#: linux_screen_translator/app.py:275
+#: linux_screen_translator/app.py:278
 msgid "Saved to {path}"
 msgstr ""
 
-#: translatorscreener/app.py:427
+#: linux_screen_translator/app.py:427
 msgid "Settings — {name}"
 msgstr ""
 
-#: translatorscreener/cli.py:12
+#: linux_screen_translator/cli.py:12
 msgid "image to process; without it the screen is captured"
 msgstr ""
 
-#: translatorscreener/cli.py:13
+#: linux_screen_translator/cli.py:13
 msgid "where to write the result"
 msgstr ""
 
-#: translatorscreener/cli.py:14
+#: linux_screen_translator/cli.py:14
 msgid "target language, e.g. CS"
 msgstr ""
 
-#: translatorscreener/cli.py:17
+#: linux_screen_translator/cli.py:17
 msgid "keep the original text instead of erasing it"
 msgstr ""
 
-#: translatorscreener/cli.py:50
+#: linux_screen_translator/cli.py:50
 msgid "→ (left unchanged)"
 msgstr ""
 
-#: translatorscreener/cli.py:33
+#: linux_screen_translator/cli.py:33
 msgid "Selection cancelled."
 msgstr ""
 
-#: translatorscreener/cli.py:47
+#: linux_screen_translator/cli.py:47
 msgid "Done — {summary}, written to {path}"
 msgstr ""
 
-#: translatorscreener/i18n.py:20
+#: linux_screen_translator/i18n.py:20
 msgid "Linux Screen Translator"
 msgstr ""
 
-#: translatorscreener/pipeline.py:31
+#: linux_screen_translator/pipeline.py:31
 msgid "Recognising text…"
 msgstr ""
 
-#: translatorscreener/pipeline.py:47
+#: linux_screen_translator/pipeline.py:47
 msgid "Rendering the translation…"
 msgstr ""
 
-#: translatorscreener/pipeline.py:22
+#: linux_screen_translator/pipeline.py:22
 msgid "{count} blocks in {seconds:.1f} s"
 msgstr ""
 
-#: translatorscreener/pipeline.py:38
+#: linux_screen_translator/pipeline.py:38
 msgid "Translating {count} blocks…"
 msgstr ""
 
-#: translatorscreener/translate.py:200
+#: linux_screen_translator/translate.py:200
 msgid "free"
 msgstr ""
 
-#: translatorscreener/translate.py:200
+#: linux_screen_translator/translate.py:200
 msgid "paid"
 msgstr ""
 
-#: translatorscreener/translate.py:192
+#: linux_screen_translator/translate.py:192
 msgid "DeepL rejected the key (403). Check that you copied all of it."
 msgstr ""
 
-#: translatorscreener/translate.py:201
+#: linux_screen_translator/translate.py:201
 msgid "{used} of {limit} characters used, {left} left ({tier} tier)"
 msgstr ""
 
-#: translatorscreener/translate.py:97
+#: linux_screen_translator/translate.py:97
 msgid "No DeepL API key has been set."
 msgstr ""
 
-#: translatorscreener/translate.py:133
+#: linux_screen_translator/translate.py:133
 msgid "DeepL rejected the key (403). Check your API key."
 msgstr ""
 
-#: translatorscreener/translate.py:135
+#: linux_screen_translator/translate.py:135
 msgid "The monthly DeepL quota is used up (456)."
 msgstr ""
 
-#: translatorscreener/translate.py:194
+#: linux_screen_translator/translate.py:194
 msgid "DeepL returned {status}."
 msgstr ""
 
-#: translatorscreener/translate.py:138
+#: linux_screen_translator/translate.py:138
 msgid "DeepL returned {status}: {body}"
 msgstr ""
 
-#: translatorscreener/translate.py:189
+#: linux_screen_translator/translate.py:189
 msgid "Could not reach DeepL: {error}"
 msgstr ""
 
-#: translatorscreener/translate.py:130
+#: linux_screen_translator/translate.py:130
 msgid "DeepL is unreachable: {error}"
 msgstr ""
 

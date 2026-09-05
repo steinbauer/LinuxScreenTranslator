@@ -8,7 +8,7 @@ from .i18n import _
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(prog="translatorscreener")
+    parser = argparse.ArgumentParser(prog="linux-screen-translator")
     parser.add_argument("--image", help=_("image to process; without it the screen is captured"))
     parser.add_argument("--out", default="translated.png", help=_("where to write the result"))
     parser.add_argument("--lang", help=_("target language, e.g. CS"))
