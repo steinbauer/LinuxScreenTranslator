@@ -50,7 +50,7 @@ English Wikipedia front page comes back in Russian in under seven seconds.
 | Step | Tool |
 |---|---|
 | Area capture | XDG Desktop Portal — works on both Wayland and X11 |
-| Text recognition | RapidOCR (PaddleOCR as ONNX), locally on the CPU |
+| Text recognition | RapidOCR (PP-OCRv6 as ONNX), locally on the CPU |
 | Translation | DeepL API |
 | Erasing the original | OpenCV inpainting (Telea) |
 | Typesetting | Pillow, matching the original size, tilt and alignment |
@@ -119,10 +119,6 @@ entry to `TARGET_HINTS` in `linux_screen_translator/translate.py`.
 
 ## Known limitations
 
-* The OCR model is English/Chinese and **does not read diacritics**
-  ("Hlavní stránka" comes out as "Hlavni stranka"). That does not matter when
-  translating *into* those languages, because such text is skipped anyway, but
-  translating *out of* them works poorly.
 * Inpainting is classical (Telea). On flat or mildly textured backgrounds the
   result is indistinguishable from the original; over a busy photograph a
   blurred trace remains. LaMa would be sharper, at the cost of ~200 MB and a

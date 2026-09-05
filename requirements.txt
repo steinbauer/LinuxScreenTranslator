@@ -1,6 +1,6 @@
 # PyGObject (gi), GTK4, libadwaita a AyatanaAppIndicator3 se berou ze systému,
 # proto má venv zapnuté include-system-site-packages.
-rapidocr-onnxruntime>=1.2
+rapidocr>=3.9
 opencv-python>=4.9
 Pillow>=10
 requests>=2.31

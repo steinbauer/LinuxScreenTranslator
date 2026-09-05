@@ -48,7 +48,7 @@ se vrátí v ruštině za necelých sedm sekund.
 | Krok | Nástroj |
 |---|---|
 | Záchyt oblasti | XDG Desktop Portal — funguje na Waylandu i X11 |
-| Rozpoznání textu | RapidOCR (PaddleOCR v ONNX), lokálně na procesoru |
+| Rozpoznání textu | RapidOCR (PP-OCRv6 v ONNX), lokálně na procesoru |
 | Překlad | DeepL API |
 | Vymazání originálu | OpenCV inpainting (Telea) |
 | Sazba překladu | Pillow, dodrží velikost, natočení i zarovnání originálu |
@@ -102,9 +102,6 @@ Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru.
 
 ## Známá omezení
 
-* OCR model je anglicko-čínský a **nečte diakritiku** („Hlavní stránka“ přečte
-  jako „Hlavni stranka“). Při překladu *do* těchto jazyků to nevadí, protože
-  takový text se stejně přeskakuje, ale opačný směr funguje špatně.
 * Inpainting je klasický (Telea). Na jednobarevném a mírně členitém pozadí je
   výsledek nerozeznatelný od originálu, přes složitou fotografii zůstane
   rozmazaná stopa. Ostřejší by byl model LaMa za cenu ~200 MB a sekundy navíc.

@@ -122,11 +122,11 @@ class Group:
         return centre[0], centre[1], max(xs) - min(xs), max(ys) - min(ys)
 
 
-@lru_cache(maxsize=1)
-def _engine():
-    # Loading the models takes about 0.2 s, so keep a single instance around.
-    from rapidocr_onnxruntime import RapidOCR
-    return RapidOCR()
+@lru_cache(maxsize=4)
+def _engine(box_thresh):
+    # Loading the models costs a moment, so keep an instance per threshold.
+    from rapidocr import RapidOCR
+    return RapidOCR(params={"Det.box_thresh": box_thresh})
 
 
 def _longest_letter_run(text):
@@ -163,10 +163,13 @@ def recognise(image_path, min_confidence=0.5, box_thresh=0.3):
     lettering across a T-shirt, for instance, gets dropped entirely. 0.3
     recovers those lines without noticeably adding noise.
     """
-    result, _elapsed = _engine()(str(image_path), box_thresh=box_thresh)
+    result = _engine(box_thresh)(str(image_path))
+    if result.boxes is None:
+        return []
+
     blocks = [
-        Block(text=text, score=float(score), quad=[tuple(p) for p in quad])
-        for quad, text, score in (result or [])
+        Block(text=text, score=float(score), quad=[tuple(point) for point in quad])
+        for quad, text, score in zip(result.boxes, result.txts, result.scores)
         if text.strip() and float(score) >= min_confidence and _worth_translating(text)
     ]
     blocks.sort(key=lambda b: (b.bbox[1], b.bbox[0]))
