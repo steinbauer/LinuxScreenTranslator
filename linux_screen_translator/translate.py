@@ -71,6 +71,12 @@ class Translation:
         return self.text.strip().casefold() == original.strip().casefold()
 
 
+def is_shouty(text):
+    """True for text set entirely in capitals, with at least two letters."""
+    letters = [ch for ch in text if ch.isalpha()]
+    return len(letters) >= 2 and all(ch.isupper() for ch in letters)
+
+
 def base_lang(code):
     """Turn "EN-GB" into "EN" so languages can be compared."""
     return (code or "").split("-")[0].upper()
@@ -116,7 +122,13 @@ class DeepLTranslator:
         if not send:
             return results
 
-        data = {"text": [texts[i] for i in send], "target_lang": self.target_lang}
+        # Capitals confuse the translator: "TAREK" comes back as a verb, and a
+        # shouted sentence translates worse than the same words in ordinary
+        # case. Send them cased normally and shout the result instead.
+        shouty = {i for i in send if is_shouty(texts[i])}
+        payload = [texts[i].capitalize() if i in shouty else texts[i] for i in send]
+
+        data = {"text": payload, "target_lang": self.target_lang}
         if self.source_lang:
             data["source_lang"] = self.source_lang
         try:
@@ -140,8 +152,9 @@ class DeepLTranslator:
             )
 
         for index, item in zip(send, response.json()["translations"]):
+            text = item["text"].upper() if index in shouty else item["text"]
             results[index] = Translation(
-                text=item["text"],
+                text=text,
                 detected=base_lang(item.get("detected_source_language", "")),
             )
         return results

@@ -246,3 +246,31 @@ def merge_overlapping(groups, min_ratio=0.2):
             if changed:
                 break
     return groups
+
+
+def display_name_indices(groups, max_words=4, gap_ratio=2.5, min_overlap=0.5):
+    """Groups that look like an account's display name beside its @handle.
+
+    A proper name is not text to translate, and translating it does real harm:
+    the display name "TAREK" came back from DeepL as a Czech verb. What marks
+    one out is position — a short piece of text sitting on the same line,
+    immediately to the left of a block that starts with an @.
+    """
+    handles = [g.bbox for g in groups if g.text.lstrip().startswith("@")]
+    if not handles:
+        return set()
+
+    found = set()
+    for index, group in enumerate(groups):
+        if group.text.lstrip().startswith("@") or len(group.text.split()) > max_words:
+            continue
+        x0, y0, x1, y1 = group.bbox
+        height = y1 - y0
+        for hx0, hy0, hx1, hy1 in handles:
+            shared = min(y1, hy1) - max(y0, hy0)
+            if shared <= min_overlap * min(height, hy1 - hy0):
+                continue
+            if 0 <= hx0 - x1 <= gap_ratio * height:
+                found.add(index)
+                break
+    return found

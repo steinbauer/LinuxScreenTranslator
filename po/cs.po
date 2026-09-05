@@ -150,7 +150,7 @@ msgid "The desktop saves every capture into your Screenshots folder."
 msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
 
 #: linux_screen_translator/app.py:384
-#: linux_screen_translator/translate.py:179
+#: linux_screen_translator/translate.py:192
 msgid "Enter a key to see the remaining quota."
 msgstr "Zadej klíč a uvidíš zbývající limit."
 
@@ -220,7 +220,7 @@ msgstr "Překladač obrazovky pro Linux"
 msgid "Recognising text…"
 msgstr "Rozpoznávám text…"
 
-#: linux_screen_translator/pipeline.py:47
+#: linux_screen_translator/pipeline.py:53
 msgid "Rendering the translation…"
 msgstr "Vykresluji překlad…"
 
@@ -228,51 +228,51 @@ msgstr "Vykresluji překlad…"
 msgid "{count} blocks in {seconds:.1f} s"
 msgstr "{count} bloků za {seconds:.1f} s"
 
-#: linux_screen_translator/pipeline.py:38
+#: linux_screen_translator/pipeline.py:43
 msgid "Translating {count} blocks…"
 msgstr "Překládám {count} bloků…"
 
-#: linux_screen_translator/translate.py:200
+#: linux_screen_translator/translate.py:213
 msgid "free"
 msgstr "bezplatný"
 
-#: linux_screen_translator/translate.py:200
+#: linux_screen_translator/translate.py:213
 msgid "paid"
 msgstr "placený"
 
-#: linux_screen_translator/translate.py:192
+#: linux_screen_translator/translate.py:205
 msgid "DeepL rejected the key (403). Check that you copied all of it."
 msgstr "DeepL klíč odmítl (403). Zkontroluj, že jsi ho zkopíroval celý."
 
-#: linux_screen_translator/translate.py:201
+#: linux_screen_translator/translate.py:214
 msgid "{used} of {limit} characters used, {left} left ({tier} tier)"
 msgstr "využito {used} z {limit} znaků, zbývá {left} ({tier} tarif)"
 
-#: linux_screen_translator/translate.py:97
+#: linux_screen_translator/translate.py:103
 msgid "No DeepL API key has been set."
 msgstr "Není nastavený DeepL API klíč."
 
-#: linux_screen_translator/translate.py:133
+#: linux_screen_translator/translate.py:145
 msgid "DeepL rejected the key (403). Check your API key."
 msgstr "DeepL klíč odmítl (403). Zkontroluj API klíč."
 
-#: linux_screen_translator/translate.py:135
+#: linux_screen_translator/translate.py:147
 msgid "The monthly DeepL quota is used up (456)."
 msgstr "Vyčerpaný měsíční limit DeepL (456)."
 
-#: linux_screen_translator/translate.py:194
+#: linux_screen_translator/translate.py:207
 msgid "DeepL returned {status}."
 msgstr "DeepL vrátil {status}."
 
-#: linux_screen_translator/translate.py:138
+#: linux_screen_translator/translate.py:150
 msgid "DeepL returned {status}: {body}"
 msgstr "DeepL vrátil {status}: {body}"
 
-#: linux_screen_translator/translate.py:189
+#: linux_screen_translator/translate.py:202
 msgid "Could not reach DeepL: {error}"
 msgstr "Nepodařilo se spojit s DeepL: {error}"
 
-#: linux_screen_translator/translate.py:130
+#: linux_screen_translator/translate.py:142
 msgid "DeepL is unreachable: {error}"
 msgstr "DeepL je nedostupný: {error}"
 
