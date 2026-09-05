@@ -8,6 +8,41 @@ jejich místo se vysází překlad.
 Vzniklo kvůli anglickým memům na X.com, které jde jinak přeložit jen ručním
 opisováním.
 
+## Jak to vypadá
+
+Vlevo původní snímek, vpravo výsledek. Nic z toho není naaranžované — každá
+dvojice vyšla z nástroje tak, jak je.
+
+**Angličtina → španělština.** Písmo si nechává obtažení a plameny za ním se
+dopočítají tam, kde býval text.
+
+| | |
+|---|---|
+| ![Originál](docs/examples/spider-before.jpg) | ![Překlad](docs/examples/spider-after.jpg) |
+
+**Němčina → francouzština.** Zdrojový jazyk se rozpozná, nenastavuje se.
+
+| | |
+|---|---|
+| ![Originál](docs/examples/monkey-before.jpg) | ![Překlad](docs/examples/monkey-after.jpg) |
+
+**Angličtina → němčina.** Titulky vypálené do videa, přeložené na místě.
+
+| | |
+|---|---|
+| ![Originál](docs/examples/subtitles-before.jpg) | ![Překlad](docs/examples/subtitles-after.jpg) |
+
+**Angličtina → japonština.** Jiné písmo potřebuje jinou sadu znaků a text bez
+mezer se musí lámat po znacích. Všimni si, že jméno účtu zůstalo nedotčené —
+je to vlastní jméno, ne text k překladu.
+
+| | |
+|---|---|
+| ![Originál](docs/examples/tweet-before.jpg) | ![Překlad](docs/examples/tweet-after.jpg) |
+
+Celá stránka jde stejně dobře jako její roh — snímek celé anglické Wikipedie
+se vrátí v ruštině za necelých sedm sekund.
+
 ## Jak to funguje
 
 | Krok | Nástroj |

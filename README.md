@@ -10,6 +10,41 @@ them by hand.
 
 *Czech version of this file: [README.cs.md](README.cs.md).*
 
+## What it looks like
+
+Original capture on the left, result on the right. Nothing here is a mock-up —
+each pair came out of the tool as shipped.
+
+**English → Spanish.** Meme lettering keeps its outline, and the fire behind it
+is filled back in where the words used to be.
+
+| | |
+|---|---|
+| ![Original](docs/examples/spider-before.jpg) | ![Translated](docs/examples/spider-after.jpg) |
+
+**German → French.** The source language is detected, not configured.
+
+| | |
+|---|---|
+| ![Original](docs/examples/monkey-before.jpg) | ![Translated](docs/examples/monkey-after.jpg) |
+
+**English → German.** Burnt-in video subtitles, translated in place.
+
+| | |
+|---|---|
+| ![Original](docs/examples/subtitles-before.jpg) | ![Translated](docs/examples/subtitles-after.jpg) |
+
+**English → Japanese.** A different script needs a different typeface, and text
+without spaces has to be broken by character. Note that the account name is
+left alone: it is a proper noun, not something to translate.
+
+| | |
+|---|---|
+| ![Original](docs/examples/tweet-before.jpg) | ![Translated](docs/examples/tweet-after.jpg) |
+
+A whole page works as well as a corner of one — a full-screen capture of the
+English Wikipedia front page comes back in Russian in under seven seconds.
+
 ## How it works
 
 | Step | Tool |
