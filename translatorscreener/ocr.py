@@ -5,6 +5,7 @@ translator torn sentence fragments, so lines that visually belong together are
 merged into a paragraph first.
 """
 
+import math
 import unicodedata
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -29,6 +30,35 @@ class Block:
         _x0, y0, _x1, y1 = self.bbox
         return y1 - y0
 
+    @property
+    def angle(self):
+        """Tilt of the baseline in degrees, positive going down to the right.
+
+        The quad comes ordered top-left, top-right, bottom-right, bottom-left,
+        so the first edge is the baseline direction.
+        """
+        (x0, y0), (x1, y1) = self.quad[0], self.quad[1]
+        return math.degrees(math.atan2(y1 - y0, x1 - x0))
+
+    @property
+    def oriented_size(self):
+        """Width along the baseline and height across it.
+
+        For tilted text the axis-aligned box is much larger than the letters,
+        so measuring along the baseline is the only way to get the real size.
+        """
+        (x0, y0), (x1, y1), (x2, y2) = self.quad[0], self.quad[1], self.quad[2]
+        width = math.hypot(x1 - x0, y1 - y0)
+        height = math.hypot(x2 - x1, y2 - y1)
+        return width, height
+
+
+def _rotate(point, degrees, origin=(0.0, 0.0)):
+    radians = math.radians(degrees)
+    cos, sin = math.cos(radians), math.sin(radians)
+    dx, dy = point[0] - origin[0], point[1] - origin[1]
+    return (origin[0] + dx * cos - dy * sin, origin[1] + dx * sin + dy * cos)
+
 
 @dataclass
 class Group:
@@ -52,6 +82,32 @@ class Group:
     @property
     def line_height(self):
         return sum(b.height for b in self.blocks) / len(self.blocks)
+
+    @property
+    def angle(self):
+        """Baseline tilt of the paragraph, weighted by how long each line is."""
+        weights = [b.oriented_size[0] for b in self.blocks]
+        total = sum(weights) or 1.0
+        return sum(b.angle * w for b, w in zip(self.blocks, weights)) / total
+
+    @property
+    def oriented_line_height(self):
+        return sum(b.oriented_size[1] for b in self.blocks) / len(self.blocks)
+
+    @property
+    def oriented_box(self):
+        """The paragraph measured in its own tilted frame.
+
+        Returns (centre_x, centre_y, width, height) where width and height are
+        along and across the baseline.
+        """
+        angle = self.angle
+        points = [p for block in self.blocks for p in block.quad]
+        upright = [_rotate(p, -angle) for p in points]
+        xs = [p[0] for p in upright]
+        ys = [p[1] for p in upright]
+        centre = _rotate(((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2), angle)
+        return centre[0], centre[1], max(xs) - min(xs), max(ys) - min(ys)
 
 
 @lru_cache(maxsize=1)

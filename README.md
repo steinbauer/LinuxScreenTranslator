@@ -18,7 +18,7 @@ them by hand.
 | Text recognition | RapidOCR (PaddleOCR as ONNX), locally on the CPU |
 | Translation | DeepL API |
 | Erasing the original | OpenCV inpainting (Telea) |
-| Typesetting | Pillow, with the font size fitted to the space available |
+| Typesetting | Pillow, matching the original size, tilt and alignment |
 
 A pass takes roughly **1 second** for a small area and about 4 seconds for a
 full 4K screen. Nothing but the recognised text leaves the machine — OCR runs

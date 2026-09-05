@@ -6,11 +6,14 @@ The steps mirror what screen translation does on Android:
   3. typeset the translation into the freed space, in the original's colour.
 """
 
+import math
 from functools import lru_cache
 
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+
+from .ocr import _rotate
 
 MIN_FONT_SIZE = 9
 LINE_SPACING = 1.22
@@ -18,6 +21,13 @@ LINE_SPACING = 1.22
 # space around it. Translations are often longer than the source, so some
 # room to grow is needed.
 MAX_GROWTH = 2.2
+# Below this tilt the text is treated as horizontal. Short labels give noisy
+# quads — buttons like "Chat" or "More" routinely measure two or three degrees
+# off — so the threshold has to clear that noise before anything is rotated.
+ROTATION_EPS = 4.0
+# Tilted text sits on shirts, signs and posters where there is no free space
+# around it, so it may grow far less than text in a page layout.
+ROTATED_GROWTH = 1.5
 
 
 @lru_cache(maxsize=128)
@@ -186,6 +196,58 @@ def _alignment(group):
     return "left" if spread(lefts) <= spread(centres) else "center"
 
 
+def _alignment_oriented(group):
+    """Alignment measured along the baseline rather than along the image."""
+    if len(group.blocks) < 2:
+        return "center"
+    angle = group.angle
+    lefts, centres = [], []
+    for block in group.blocks:
+        left = _rotate(block.quad[0], -angle)
+        right = _rotate(block.quad[1], -angle)
+        lefts.append(left[0])
+        centres.append((left[0] + right[0]) / 2)
+    spread = lambda values: max(values) - min(values)
+    return "left" if spread(lefts) <= spread(centres) else "center"
+
+
+def _draw_tilted(canvas, draw, group, text_rgb, outline_rgb, font_path):
+    """Typeset a tilted paragraph: lay it out flat, rotate it, paste it back."""
+    centre_x, centre_y, width, height = group.oriented_box
+    angle = group.angle
+    if width < 8 or height < 6:
+        return
+
+    max_size = max(MIN_FONT_SIZE, int(group.oriented_line_height * 1.05))
+    font, lines, size = fit_text(draw, group.translated, font_path,
+                                 width, height * ROTATED_GROWTH, max_size)
+
+    line_height = size * LINE_SPACING
+    stroke = max(1, round(size / 14))
+    padding = size  # keeps the stroke and any overhang inside the layer
+    layer = Image.new("RGBA",
+                      (int(width) + 2 * padding,
+                       int(line_height * len(lines)) + 2 * padding),
+                      (0, 0, 0, 0))
+    layer_draw = ImageDraw.Draw(layer)
+
+    align = _alignment_oriented(group)
+    cursor_y = padding
+    for line in lines:
+        line_width = layer_draw.textlength(line, font=font)
+        offset = padding if align == "left" else padding + (width - line_width) / 2
+        layer_draw.text((offset, cursor_y), line, font=font, fill=text_rgb,
+                        stroke_width=stroke, stroke_fill=outline_rgb)
+        cursor_y += line_height
+
+    # PIL rotates counter-clockwise, the measured angle grows clockwise.
+    turned = layer.rotate(-angle, expand=True, resample=Image.BICUBIC)
+    canvas.paste(turned,
+                 (int(round(centre_x - turned.width / 2)),
+                  int(round(centre_y - turned.height / 2))),
+                 turned)
+
+
 def render(image_path, groups, font_path, use_inpaint=True):
     """Return a PIL Image with the translation in place of the original text."""
     source = Image.open(image_path).convert("RGB")
@@ -206,6 +268,10 @@ def render(image_path, groups, font_path, use_inpaint=True):
     draw = ImageDraw.Draw(canvas)
 
     for index, (group, (text_rgb, outline_rgb)) in enumerate(zip(active, colours)):
+        if abs(group.angle) >= ROTATION_EPS:
+            _draw_tilted(canvas, draw, group, text_rgb, outline_rgb, font_path)
+            continue
+
         x0, y0, x1, y1 = _clamp_bbox(group.bbox, rgb.shape)
         box_w, box_h = x1 - x0, y1 - y0
         if box_w < 8 or box_h < 6:
@@ -217,7 +283,7 @@ def render(image_path, groups, font_path, use_inpaint=True):
         available = 2 * min(centre_y - top, bottom - centre_y) - 4
         max_height = max(box_h, min(available, box_h * MAX_GROWTH))
 
-        max_size = max(MIN_FONT_SIZE, int(group.line_height * 1.1))
+        max_size = max(MIN_FONT_SIZE, int(group.oriented_line_height * 1.1))
         font, lines, size = fit_text(draw, group.translated, font_path,
                                      box_w, max_height, max_size)
 

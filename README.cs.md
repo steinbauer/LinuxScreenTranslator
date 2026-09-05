@@ -16,7 +16,7 @@ opisováním.
 | Rozpoznání textu | RapidOCR (PaddleOCR v ONNX), lokálně na procesoru |
 | Překlad | DeepL API |
 | Vymazání originálu | OpenCV inpainting (Telea) |
-| Sazba překladu | Pillow, velikost písma se dopočítá podle místa |
+| Sazba překladu | Pillow, dodrží velikost, natočení i zarovnání originálu |
 
 Průchod trvá zhruba **1 sekundu** na výřez a 4 sekundy na celou 4K obrazovku.
 Ven jde jen rozpoznaný text — OCR běží u vás.
