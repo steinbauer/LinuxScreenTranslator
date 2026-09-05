@@ -71,7 +71,7 @@ msgstr "Uložit originál"
 msgid "Save both"
 msgstr "Uložit obojí"
 
-#: linux_screen_translator/app.py:444
+#: linux_screen_translator/app.py:466
 msgid "Checking…"
 msgstr "Ověřuji…"
 
@@ -80,7 +80,7 @@ msgid "Show the original (hold space)"
 msgstr "Zobrazit původní snímek (podrž mezerník)"
 
 #: linux_screen_translator/app.py:80
-#: linux_screen_translator/app.py:468
+#: linux_screen_translator/app.py:490
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -154,30 +154,39 @@ msgid "Fills in the background underneath. When off, the translation is drawn ov
 msgstr "Dopočítá pozadí pod textem. Vypnuté se překlad píše přes originál."
 
 #: linux_screen_translator/app.py:368
+msgid "Start with the session"
+msgstr "Spouštět po přihlášení"
+
+#: linux_screen_translator/app.py:369
+#: linux_screen_translator/app.py:444
+msgid "Puts the icon back in the top bar after logging in."
+msgstr "Po přihlášení vrátí ikonu do horní lišty."
+
+#: linux_screen_translator/app.py:376
 msgid "Keep the captures"
 msgstr "Ponechat pořízené snímky"
 
-#: linux_screen_translator/app.py:369
+#: linux_screen_translator/app.py:377
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
 
-#: linux_screen_translator/app.py:389
+#: linux_screen_translator/app.py:397
 msgid "chosen by hand"
 msgstr "vybráno ručně"
 
-#: linux_screen_translator/app.py:389
+#: linux_screen_translator/app.py:397
 msgid "picked for the target language"
 msgstr "zvoleno podle cílového jazyka"
 
-#: linux_screen_translator/app.py:405
+#: linux_screen_translator/app.py:413
 msgid "Choose a typeface"
 msgstr "Výběr písma"
 
-#: linux_screen_translator/app.py:407
+#: linux_screen_translator/app.py:415
 msgid "Fonts"
 msgstr "Písma"
 
-#: linux_screen_translator/app.py:440
+#: linux_screen_translator/app.py:462
 #: linux_screen_translator/translate.py:192
 msgid "Enter a key to see the remaining quota."
 msgstr "Zadej klíč a uvidíš zbývající limit."
@@ -199,6 +208,10 @@ msgstr "Něco se pokazilo"
 msgid "Saved alongside {path}"
 msgstr "Originál uložen jako {path}"
 
+#: linux_screen_translator/app.py:440
+msgid "Could not change the autostart entry."
+msgstr "Nepodařilo se změnit nastavení spouštění."
+
 #: linux_screen_translator/app.py:195
 msgid "Recognised text — {summary}"
 msgstr "Rozpoznaný text — {summary}"
@@ -208,11 +221,11 @@ msgstr "Rozpoznaný text — {summary}"
 msgid "Saved to {path}"
 msgstr "Uloženo do {path}"
 
-#: linux_screen_translator/app.py:483
+#: linux_screen_translator/app.py:505
 msgid "Settings — {name}"
 msgstr "Nastavení — {name}"
 
-#: linux_screen_translator/app.py:394
+#: linux_screen_translator/app.py:402
 msgid "{font} has no glyphs for this language — the text would come out as empty boxes"
 msgstr "{font} pro tento jazyk nemá znaky — text by vyšel jako prázdné rámečky"
 

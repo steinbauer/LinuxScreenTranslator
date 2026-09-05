@@ -12,7 +12,7 @@ gi.require_version("Adw", "1")
 gi.require_version("GdkPixbuf", "2.0")
 from gi.repository import Adw, Gdk, GdkPixbuf, Gio, GLib, Gtk  # noqa: E402
 
-from . import capture, config, fonts, keyring_store, notify, pipeline, translate  # noqa: E402
+from . import autostart, capture, config, fonts, keyring_store, notify, pipeline, translate  # noqa: E402
 from .i18n import APP_NAME, _  # noqa: E402
 
 APP_ID = "cz.polyweb.LinuxScreenTranslator"
@@ -364,6 +364,14 @@ class PreferencesUI:
         self._inpaint.connect("notify::active", self._on_switch, "inpaint")
         group.add(self._inpaint)
 
+        self._autostart = Adw.SwitchRow(
+            title=_("Start with the session"),
+            subtitle=_("Puts the icon back in the top bar after logging in."),
+            active=autostart.is_enabled(),
+        )
+        self._autostart.connect("notify::active", self._on_autostart)
+        group.add(self._autostart)
+
         self._keep = Adw.SwitchRow(
             title=_("Keep the captures"),
             subtitle=_("The desktop saves every capture into your Screenshots folder."),
@@ -420,6 +428,20 @@ class PreferencesUI:
             self._refresh_font_row()
 
         dialog.open(self._font_row.get_root(), None, done)
+
+    def _on_autostart(self, row, _param):
+        """Write or remove the autostart entry, and start the icon right away.
+
+        Waiting until the next login to see any effect would make the switch
+        look broken.
+        """
+        ok = autostart.enable() if row.get_active() else autostart.disable()
+        if not ok:
+            row.set_subtitle("⚠ " + _("Could not change the autostart entry."))
+            return
+        if row.get_active():
+            self._autostart.set_subtitle(
+                _("Puts the icon back in the top bar after logging in."))
 
     def _on_switch(self, row, _param, key):
         self._cfg[key] = row.get_active()

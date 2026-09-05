@@ -69,7 +69,7 @@ msgstr ""
 msgid "Save both"
 msgstr ""
 
-#: linux_screen_translator/app.py:444
+#: linux_screen_translator/app.py:466
 msgid "Checking…"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgid "Show the original (hold space)"
 msgstr ""
 
 #: linux_screen_translator/app.py:80
-#: linux_screen_translator/app.py:468
+#: linux_screen_translator/app.py:490
 msgid "Settings"
 msgstr ""
 
@@ -152,30 +152,39 @@ msgid "Fills in the background underneath. When off, the translation is drawn ov
 msgstr ""
 
 #: linux_screen_translator/app.py:368
-msgid "Keep the captures"
+msgid "Start with the session"
 msgstr ""
 
 #: linux_screen_translator/app.py:369
+#: linux_screen_translator/app.py:444
+msgid "Puts the icon back in the top bar after logging in."
+msgstr ""
+
+#: linux_screen_translator/app.py:376
+msgid "Keep the captures"
+msgstr ""
+
+#: linux_screen_translator/app.py:377
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr ""
 
-#: linux_screen_translator/app.py:389
+#: linux_screen_translator/app.py:397
 msgid "chosen by hand"
 msgstr ""
 
-#: linux_screen_translator/app.py:389
+#: linux_screen_translator/app.py:397
 msgid "picked for the target language"
 msgstr ""
 
-#: linux_screen_translator/app.py:405
+#: linux_screen_translator/app.py:413
 msgid "Choose a typeface"
 msgstr ""
 
-#: linux_screen_translator/app.py:407
+#: linux_screen_translator/app.py:415
 msgid "Fonts"
 msgstr ""
 
-#: linux_screen_translator/app.py:440
+#: linux_screen_translator/app.py:462
 #: linux_screen_translator/translate.py:192
 msgid "Enter a key to see the remaining quota."
 msgstr ""
@@ -197,6 +206,10 @@ msgstr ""
 msgid "Saved alongside {path}"
 msgstr ""
 
+#: linux_screen_translator/app.py:440
+msgid "Could not change the autostart entry."
+msgstr ""
+
 #: linux_screen_translator/app.py:195
 msgid "Recognised text — {summary}"
 msgstr ""
@@ -206,11 +219,11 @@ msgstr ""
 msgid "Saved to {path}"
 msgstr ""
 
-#: linux_screen_translator/app.py:483
+#: linux_screen_translator/app.py:505
 msgid "Settings — {name}"
 msgstr ""
 
-#: linux_screen_translator/app.py:394
+#: linux_screen_translator/app.py:402
 msgid "{font} has no glyphs for this language — the text would come out as empty boxes"
 msgstr ""
 
