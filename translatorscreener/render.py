@@ -28,6 +28,12 @@ ROTATION_EPS = 4.0
 # Tilted text sits on shirts, signs and posters where there is no free space
 # around it, so it may grow far less than text in a page layout.
 ROTATED_GROWTH = 1.5
+# A line may spill this far past the width of the line it replaces before the
+# type is shrunk. A little overflow reads better than visibly smaller text.
+LINE_OVERFLOW = 1.08
+# Font size used only to measure relative word widths while splitting a
+# translation across lines; the real size is decided afterwards.
+PROBE_SIZE = 40
 
 
 @lru_cache(maxsize=128)
@@ -248,6 +254,108 @@ def _draw_tilted(canvas, draw, group, text_rgb, outline_rgb, font_path):
                  turned)
 
 
+def _distribute(draw, text, blocks, font_path):
+    """Split a translated paragraph across the lines it replaces.
+
+    Translating line by line would hand the translator torn fragments, so the
+    paragraph is translated whole and only then dealt back out — each original
+    line receiving a share of the words proportional to its length. That keeps
+    the line count and the layout of the original instead of re-wrapping the
+    text into a different shape.
+    """
+    words = text.split()
+    count = len(blocks)
+    if count == 1 or not words:
+        return [text]
+    if len(words) <= count:
+        return [words[i] if i < len(words) else "" for i in range(count)]
+
+    font = _font(font_path, PROBE_SIZE)
+    word_widths = [draw.textlength(word + " ", font=font) for word in words]
+    total_words = sum(word_widths) or 1.0
+    widths = [b.oriented_size[0] for b in blocks]
+    total_width = sum(widths) or 1.0
+
+    chunks, start, consumed = [], 0, 0.0
+    for index, width in enumerate(widths[:-1]):
+        consumed += width
+        target = consumed / total_width * total_words
+        accumulated = sum(word_widths[:start])
+        end = start
+        # Every later line has to keep at least one word for itself.
+        last_possible = len(words) - (count - index - 1)
+        while end < last_possible and accumulated + word_widths[end] <= target:
+            accumulated += word_widths[end]
+            end += 1
+        end = min(max(end, start + 1), last_possible)
+        chunks.append(" ".join(words[start:end]))
+        start = end
+    chunks.append(" ".join(words[start:]))
+    return chunks
+
+
+def _common_size(draw, chunks, blocks, font_path):
+    """One type size for the whole paragraph: the largest every line can take."""
+    chosen = None
+    for chunk, block in zip(chunks, blocks):
+        if not chunk.strip():
+            continue
+        width, height = block.oriented_size
+        low, high = MIN_FONT_SIZE, max(MIN_FONT_SIZE, int(height * 1.15))
+        best = MIN_FONT_SIZE
+        while low <= high:
+            mid = (low + high) // 2
+            if draw.textlength(chunk, font=_font(font_path, mid)) <= width * LINE_OVERFLOW:
+                best = mid
+                low = mid + 1
+            else:
+                high = mid - 1
+        chosen = best if chosen is None else min(chosen, best)
+    return chosen or MIN_FONT_SIZE
+
+
+def _draw_line(canvas, draw, text, block, size, align, text_rgb, outline_rgb, font_path):
+    """Draw one line at the position, angle and alignment of the line it replaces."""
+    if not text.strip():
+        return
+    font = _font(font_path, size)
+    width = draw.textlength(text, font=font)
+    stroke = max(1, round(size / 14))
+    padding = size
+
+    layer = Image.new("RGBA",
+                      (int(width) + 2 * padding, int(size * LINE_SPACING) + 2 * padding),
+                      (0, 0, 0, 0))
+    ImageDraw.Draw(layer).text((padding, padding), text, font=font, fill=text_rgb,
+                               stroke_width=stroke, stroke_fill=outline_rgb)
+
+    angle = block.angle
+    if abs(angle) >= ROTATION_EPS:
+        layer = layer.rotate(-angle, expand=True, resample=Image.BICUBIC)
+
+    if align == "left":
+        radians = math.radians(angle)
+        anchor_x, anchor_y = block.left_mid
+        centre_x = anchor_x + math.cos(radians) * width / 2
+        centre_y = anchor_y + math.sin(radians) * width / 2
+    else:
+        centre_x, centre_y = block.centre
+
+    canvas.paste(layer,
+                 (int(round(centre_x - layer.width / 2)),
+                  int(round(centre_y - layer.height / 2))),
+                 layer)
+
+
+def _draw_per_line(canvas, draw, group, text_rgb, outline_rgb, font_path):
+    chunks = _distribute(draw, group.translated, group.blocks, font_path)
+    size = _common_size(draw, chunks, group.blocks, font_path)
+    align = _alignment_oriented(group)
+    for chunk, block in zip(chunks, group.blocks):
+        _draw_line(canvas, draw, chunk, block, size, align,
+                   text_rgb, outline_rgb, font_path)
+
+
 def render(image_path, groups, font_path, use_inpaint=True):
     """Return a PIL Image with the translation in place of the original text."""
     source = Image.open(image_path).convert("RGB")
@@ -268,6 +376,11 @@ def render(image_path, groups, font_path, use_inpaint=True):
     draw = ImageDraw.Draw(canvas)
 
     for index, (group, (text_rgb, outline_rgb)) in enumerate(zip(active, colours)):
+        if len(group.blocks) > 1:
+            # More than one line: put the translation back on those same lines.
+            _draw_per_line(canvas, draw, group, text_rgb, outline_rgb, font_path)
+            continue
+
         if abs(group.angle) >= ROTATION_EPS:
             _draw_tilted(canvas, draw, group, text_rgb, outline_rgb, font_path)
             continue

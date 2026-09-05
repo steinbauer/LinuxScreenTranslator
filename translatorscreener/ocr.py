@@ -41,6 +41,18 @@ class Block:
         return math.degrees(math.atan2(y1 - y0, x1 - x0))
 
     @property
+    def centre(self):
+        xs = [p[0] for p in self.quad]
+        ys = [p[1] for p in self.quad]
+        return sum(xs) / 4, sum(ys) / 4
+
+    @property
+    def left_mid(self):
+        """Midpoint of the left edge — the anchor for left-aligned text."""
+        (x0, y0), (x3, y3) = self.quad[0], self.quad[3]
+        return (x0 + x3) / 2, (y0 + y3) / 2
+
+    @property
     def oriented_size(self):
         """Width along the baseline and height across it.
 
