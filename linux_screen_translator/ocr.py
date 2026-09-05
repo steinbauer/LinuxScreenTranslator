@@ -173,6 +173,40 @@ def recognise(image_path, min_confidence=0.5, box_thresh=0.3):
     return blocks
 
 
+# Characters a bullet is read as. OCR rarely recognises the glyph itself and
+# usually returns a stand-in, or nothing but the space that followed it.
+BULLET_MARKS = frozenset("•·‣∙▪▫◦-–—*:;.")
+
+
+def _starts_list_item(previous, block, indent_ratio=0.25, min_step=6.0):
+    """True when a line steps back to the left and opens with a bullet.
+
+    Consecutive list items sit as close together as the wrapped lines of one
+    paragraph — measured on a news column, 15px between items against 12 to
+    15px within them — so spacing cannot separate them. The left edge can:
+    items begin at the bullet while their continuations are indented past it.
+
+    That alone is not enough, because text flowing around a floated image also
+    steps left once it clears the image. Requiring a bullet as well keeps such
+    a paragraph in one piece.
+    """
+    if not _bulleted(block.text):
+        return False
+
+    step = previous.bbox[0] - block.bbox[0]
+    if step > max(min_step, indent_ratio * block.height):
+        return True
+
+    # A one-line item leaves the next one nothing to step back from, since
+    # both begin at the same left edge. Two consecutive lines opening with a
+    # bullet are two items; inside a paragraph that does not happen.
+    return _bulleted(previous.text)
+
+
+def _bulleted(text):
+    return bool(text) and (text[0].isspace() or text[0] in BULLET_MARKS)
+
+
 def _overlap_ratio(a, b):
     """How much two boxes overlap horizontally, relative to the narrower one."""
     left = max(a[0], b[0])
@@ -203,6 +237,7 @@ def group_blocks(blocks, max_gap_ratio=0.8, min_overlap=0.35, height_ratio=0.35)
             similar_size = abs(last.height - block.height) <= height_ratio * taller
             if (-last.height < gap <= limit
                     and similar_size
+                    and not _starts_list_item(last, block)
                     and _overlap_ratio(last.bbox, block.bbox) >= min_overlap):
                 group.blocks.append(block)
                 placed = True
@@ -274,3 +309,21 @@ def display_name_indices(groups, max_words=4, gap_ratio=2.5, min_overlap=0.5):
                 found.add(index)
                 break
     return found
+
+
+def split_bullet(text):
+    """Separate a leading bullet stand-in from the text that follows.
+
+    OCR reads the glyph as a colon, a full stop, or nothing but the space
+    after it. Carrying that into the translation reproduces the stand-in
+    rather than the bullet, so it is stripped before translating and a proper
+    bullet is put back when the line is drawn.
+    """
+    body = text.lstrip()
+    if not body:
+        return "", text
+    if body[0] in BULLET_MARKS and len(body) > 1 and body[1].isspace():
+        return body[0], body[1:].lstrip()
+    if text[:1].isspace() and body:
+        return " ", body
+    return "", text

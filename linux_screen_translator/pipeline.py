@@ -43,12 +43,17 @@ def process(image_path, cfg, api_key=None, translator=None, progress=None):
     say(_("Translating {count} blocks…").format(count=len(wanted)))
     engine = translator or translate.build(cfg, api_key)
     target = translate.base_lang(cfg.get("target_lang", "CS"))
-    outcome = engine.translate([groups[i].text for i in wanted])
-    for group, result in zip((groups[i] for i in wanted), outcome):
+    bullets = {i: ocr.split_bullet(groups[i].text) for i in wanted}
+    outcome = engine.translate([bullets[i][1] for i in wanted])
+    for index, (group, result) in zip(wanted, zip((groups[i] for i in wanted), outcome)):
         # Leave anything already in the target language alone: re-typesetting
         # it merely because it happened to be on screen would only degrade it.
+        marker, body = bullets[index]
         already_target = translate.base_lang(result.detected) == target
-        group.translated = "" if already_target or result.same_as(group.text) else result.text
+        if already_target or result.same_as(body):
+            group.translated = ""
+        else:
+            group.translated = f"\u2022 {result.text}" if marker else result.text
 
     say(_("Rendering the translation…"))
     font_path = fonts.for_language(cfg.get("target_lang", "CS"), cfg.get("font_path", ""))
