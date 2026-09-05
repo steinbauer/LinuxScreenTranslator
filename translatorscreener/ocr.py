@@ -129,13 +129,30 @@ def _engine():
     return RapidOCR()
 
 
+def _longest_letter_run(text):
+    longest = run = 0
+    for ch in text:
+        run = run + 1 if unicodedata.category(ch).startswith("L") else 0
+        longest = max(longest, run)
+    return longest
+
+
 def _worth_translating(text):
-    """Drop blocks without real words — timestamps, counters, icon labels.
+    """Drop blocks that hold no real words — timestamps, counters, icon labels.
 
     Re-typesetting "0:01 / 0:27" gains nothing and only degrades the image.
+
+    Counters are the awkward case: the bar-chart glyph in front of a view
+    count is read as letters, so "ili 625" and "15 tis." look like text. What
+    separates them from genuine short labels such as "Chat" or "Alcohol" is
+    that they carry digits while their longest run of letters stays tiny.
     """
     letters = sum(1 for ch in text if unicodedata.category(ch).startswith("L"))
-    return letters >= 2
+    if letters < 2:
+        return False
+    if any(ch.isdigit() for ch in text) and _longest_letter_run(text) <= 3:
+        return False
+    return True
 
 
 def recognise(image_path, min_confidence=0.5, box_thresh=0.3):
