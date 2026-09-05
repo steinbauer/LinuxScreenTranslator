@@ -254,6 +254,21 @@ def _draw_tilted(canvas, draw, group, text_rgb, outline_rgb, font_path):
                  turned)
 
 
+def _split_characters(text, blocks):
+    """Deal a space-less text out by character count, line by line."""
+    widths = [b.oriented_size[0] for b in blocks]
+    total = sum(widths) or 1.0
+    chunks, start = [], 0
+    for index, width in enumerate(widths[:-1]):
+        remaining_lines = len(widths) - index - 1
+        end = start + max(1, round(len(text) * width / total))
+        end = min(max(end, start + 1), len(text) - remaining_lines)
+        chunks.append(text[start:end])
+        start = end
+    chunks.append(text[start:])
+    return chunks
+
+
 def _distribute(draw, text, blocks, font_path):
     """Split a translated paragraph across the lines it replaces.
 
@@ -267,7 +282,12 @@ def _distribute(draw, text, blocks, font_path):
     count = len(blocks)
     if count == 1 or not words:
         return [text]
-    if len(words) <= count:
+    if len(words) < count:
+        # Japanese, Chinese and Thai write without spaces, so a whole
+        # paragraph arrives as a single "word" and splitting on spaces would
+        # pile it onto the first line and leave the rest of the block blank.
+        if len(text) >= 2 * count:
+            return _split_characters(text, blocks)
         return [words[i] if i < len(words) else "" for i in range(count)]
 
     font = _font(font_path, PROBE_SIZE)

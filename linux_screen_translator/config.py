@@ -18,7 +18,7 @@ DEFAULTS = {
     "translator": "deepl",       # deepl | mock
     "inpaint": True,             # erase the original text and fill the background
     "keep_capture": False,       # keep the screenshot in the Screenshots folder
-    "font_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "font_path": "",            # empty means: pick one for the target language
     "min_confidence": 0.5,       # ignore OCR blocks below this confidence
     "box_thresh": 0.3,           # OCR detector threshold; lower finds curved text
 }
