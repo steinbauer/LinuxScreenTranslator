@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <!-- Symbolická ikona: shell si ji obarví podle motivu lišty. Bílá je
+       zároveň bezpečná záloha, kdyby k přebarvení nedošlo. -->
+  <g fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M2.4 3.4h9.6v7.1H6.8l-2.7 2.2v-2.2H2.4z"/>
+    <path d="M10 11.4h9.6v7.1h-1.6v2.2l-2.7-2.2H10z"/>
+  </g>
+  <text x="4.4" y="9.2" font-family="sans-serif" font-size="6.2" font-weight="bold" fill="#ffffff">A</text>
+  <text x="12.1" y="17.2" font-family="sans-serif" font-size="6.2" font-weight="bold" fill="#ffffff">Č</text>
+</svg>

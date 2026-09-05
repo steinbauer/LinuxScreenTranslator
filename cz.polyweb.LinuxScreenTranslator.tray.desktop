@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Linux Screen Translator (tray icon)
+Name[cs]=Překladač obrazovky pro Linux (ikona v liště)
+Comment=Keeps the Linux Screen Translator icon in the top bar
+Comment[cs]=Drží ikonu Překladače obrazovky v horní liště
+Exec=REPLACED_BY_INSTALL
+Icon=REPLACED_BY_ICON
+Terminal=false
+X-GNOME-Autostart-enabled=true
+Categories=Utility;
+NoDisplay=true

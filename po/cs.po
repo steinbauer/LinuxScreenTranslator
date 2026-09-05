@@ -1,0 +1,272 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Screen Translation\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: translatorscreener/app.py:21
+msgid "Czech"
+msgstr "Čeština"
+
+#: translatorscreener/app.py:21
+msgid "Slovak"
+msgstr "Slovenština"
+
+#: translatorscreener/app.py:21
+msgid "English (UK)"
+msgstr "Angličtina (UK)"
+
+#: translatorscreener/app.py:22
+msgid "English (US)"
+msgstr "Angličtina (US)"
+
+#: translatorscreener/app.py:22
+msgid "German"
+msgstr "Němčina"
+
+#: translatorscreener/app.py:22
+msgid "Polish"
+msgstr "Polština"
+
+#: translatorscreener/app.py:23
+msgid "French"
+msgstr "Francouzština"
+
+#: translatorscreener/app.py:23
+msgid "Spanish"
+msgstr "Španělština"
+
+#: translatorscreener/app.py:23
+msgid "Italian"
+msgstr "Italština"
+
+#: translatorscreener/app.py:24
+msgid "Ukrainian"
+msgstr "Ukrajinština"
+
+#: translatorscreener/app.py:24
+msgid "Portuguese"
+msgstr "Portugalština"
+
+#: translatorscreener/app.py:24
+msgid "Dutch"
+msgstr "Nizozemština"
+
+#: translatorscreener/app.py:230
+msgid "Copied to clipboard"
+msgstr "Zkopírováno do schránky"
+
+#: translatorscreener/app.py:331
+msgid "Checking…"
+msgstr "Ověřuji…"
+
+#: translatorscreener/app.py:72
+msgid "Show the original (hold space)"
+msgstr "Zobrazit původní snímek (podrž mezerník)"
+
+#: translatorscreener/app.py:80
+msgid "Copy to clipboard (Ctrl+C)"
+msgstr "Kopírovat do schránky (Ctrl+C)"
+
+#: translatorscreener/app.py:81
+msgid "Save image… (Ctrl+S)"
+msgstr "Uložit obrázek… (Ctrl+S)"
+
+#: translatorscreener/app.py:82
+#: translatorscreener/app.py:350
+msgid "Settings"
+msgstr "Nastavení"
+
+#: translatorscreener/app.py:109
+msgid "Translating…"
+msgstr "Překládám…"
+
+#: translatorscreener/app.py:154
+#: translatorscreener/app.py:121
+msgid "Nothing to translate"
+msgstr "Není co překládat"
+
+#: translatorscreener/app.py:155
+msgid "The text found is already in the target language."
+msgstr "Nalezený text už je v cílovém jazyce."
+
+#: translatorscreener/app.py:264
+msgid "Translation"
+msgstr "Překlad"
+
+#: translatorscreener/app.py:268
+msgid "Target language"
+msgstr "Cílový jazyk"
+
+#: translatorscreener/app.py:276
+msgid "DeepL API key"
+msgstr "DeepL API klíč"
+
+#: translatorscreener/app.py:281
+msgid "Verify key"
+msgstr "Ověřit klíč"
+
+#: translatorscreener/app.py:284
+msgid "Key status"
+msgstr "Stav klíče"
+
+#: translatorscreener/app.py:285
+msgid "The key is kept in the system keyring, not in the config file."
+msgstr "Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru."
+
+#: translatorscreener/app.py:293
+msgid "Behaviour"
+msgstr "Chování"
+
+#: translatorscreener/app.py:296
+msgid "Erase the original text"
+msgstr "Vymazat původní text"
+
+#: translatorscreener/app.py:297
+msgid "Fills in the background underneath. When off, the translation is drawn over the original."
+msgstr "Dopočítá pozadí pod textem. Vypnuté se překlad píše přes originál."
+
+#: translatorscreener/app.py:305
+msgid "Keep the captures"
+msgstr "Ponechat pořízené snímky"
+
+#: translatorscreener/app.py:306
+msgid "The desktop saves every capture into your Screenshots folder."
+msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
+
+#: translatorscreener/app.py:122
+#: translatorscreener/pipeline.py:35
+msgid "No text was found in the selected area."
+msgstr "Ve vybrané oblasti jsem nenašel žádný text."
+
+#: translatorscreener/app.py:125
+msgid "Translation failed"
+msgstr "Překlad se nezdařil"
+
+#: translatorscreener/app.py:128
+msgid "Something went wrong"
+msgstr "Něco se pokazilo"
+
+#: translatorscreener/app.py:187
+msgid "Recognised text — {summary}"
+msgstr "Rozpoznaný text — {summary}"
+
+#: translatorscreener/app.py:243
+msgid "Saved to {path}"
+msgstr "Uloženo do {path}"
+
+#: translatorscreener/app.py:365
+msgid "Settings — {name}"
+msgstr "Nastavení — {name}"
+
+#: translatorscreener/cli.py:12
+msgid "image to process; without it the screen is captured"
+msgstr "obrázek ke zpracování; bez něj se vyfotí obrazovka"
+
+#: translatorscreener/cli.py:13
+msgid "where to write the result"
+msgstr "kam uložit výsledek"
+
+#: translatorscreener/cli.py:14
+msgid "target language, e.g. CS"
+msgstr "cílový jazyk, například CS"
+
+#: translatorscreener/cli.py:17
+msgid "keep the original text instead of erasing it"
+msgstr "nevymazávat původní text, jen přes něj psát"
+
+#: translatorscreener/cli.py:50
+msgid "→ (left unchanged)"
+msgstr "→ (ponecháno beze změny)"
+
+#: translatorscreener/cli.py:33
+msgid "Selection cancelled."
+msgstr "Výběr zrušen."
+
+#: translatorscreener/cli.py:47
+msgid "Done — {summary}, written to {path}"
+msgstr "Hotovo — {summary}, uloženo do {path}"
+
+#: translatorscreener/i18n.py:20
+msgid "Linux Screen Translator"
+msgstr "Překladač obrazovky pro Linux"
+
+#: translatorscreener/pipeline.py:31
+msgid "Recognising text…"
+msgstr "Rozpoznávám text…"
+
+#: translatorscreener/pipeline.py:47
+msgid "Rendering the translation…"
+msgstr "Vykresluji překlad…"
+
+#: translatorscreener/pipeline.py:22
+msgid "{count} blocks in {seconds:.1f} s"
+msgstr "{count} bloků za {seconds:.1f} s"
+
+#: translatorscreener/pipeline.py:38
+msgid "Translating {count} blocks…"
+msgstr "Překládám {count} bloků…"
+
+#: translatorscreener/translate.py:176
+msgid "free"
+msgstr "bezplatný"
+
+#: translatorscreener/translate.py:176
+msgid "paid"
+msgstr "placený"
+
+#: translatorscreener/translate.py:156
+msgid "No key entered."
+msgstr "Klíč není vyplněný."
+
+#: translatorscreener/translate.py:169
+msgid "DeepL rejected the key (403). Check that you copied all of it."
+msgstr "DeepL klíč odmítl (403). Zkontroluj, že jsi ho zkopíroval celý."
+
+#: translatorscreener/translate.py:74
+msgid "No DeepL API key has been set."
+msgstr "Není nastavený DeepL API klíč."
+
+#: translatorscreener/translate.py:110
+msgid "DeepL rejected the key (403). Check your API key."
+msgstr "DeepL klíč odmítl (403). Zkontroluj API klíč."
+
+#: translatorscreener/translate.py:112
+msgid "The monthly DeepL quota is used up (456)."
+msgstr "Vyčerpaný měsíční limit DeepL (456)."
+
+#: translatorscreener/translate.py:177
+msgid "Key is valid ({tier} tier) — {used} of {limit} characters used."
+msgstr "Klíč platí ({tier} tarif) — využito {used} z {limit} znaků."
+
+#: translatorscreener/translate.py:171
+msgid "DeepL returned {status}."
+msgstr "DeepL vrátil {status}."
+
+#: translatorscreener/translate.py:115
+msgid "DeepL returned {status}: {body}"
+msgstr "DeepL vrátil {status}: {body}"
+
+#: translatorscreener/translate.py:166
+msgid "Could not reach DeepL: {error}"
+msgstr "Nepodařilo se spojit s DeepL: {error}"
+
+#: translatorscreener/translate.py:107
+msgid "DeepL is unreachable: {error}"
+msgstr "DeepL je nedostupný: {error}"
+
+#: tray.py:34
+msgid "Translate an area…"
+msgstr "Přeložit oblast…"
+
+#: tray.py:34
+msgid "Settings…"
+msgstr "Nastavení…"
+
+#: tray.py:40
+msgid "Quit"
+msgstr "Ukončit"
+

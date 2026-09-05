@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>cz.polyweb.LinuxScreenTranslator</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+
+  <name>Linux Screen Translator</name>
+  <name xml:lang="cs">Překladač obrazovky pro Linux</name>
+  <summary>Translate text on screen and typeset it in place</summary>
+  <summary xml:lang="cs">Přeloží text na obrazovce a vysází ho na jeho místo</summary>
+
+  <description>
+    <p>
+      Linux Screen Translator brings the screen translation known from Android to
+      the Linux desktop. Pick an area of the screen and the text in it is
+      recognised, the original lettering is erased, the background underneath
+      is filled in, and the translation is typeset in its place — matching the
+      original colour, size and alignment.
+    </p>
+    <p xml:lang="cs">
+      Překladač obrazovky přináší na Linux to, co znáte z Androidu. Označíte část
+      obrazovky, text v ní se rozpozná, původní nápisy se vymažou, pozadí pod
+      nimi se dopočítá a na jejich místo se vysází překlad — ve stejné barvě,
+      velikosti i zarovnání jako originál.
+    </p>
+    <p>Text that already is in the target language is left untouched.</p>
+    <p xml:lang="cs">Text, který už je v cílovém jazyce, zůstane nedotčený.</p>
+    <p>Recognition runs locally on the CPU; only the recognised text is sent to the translation service.</p>
+    <p xml:lang="cs">Rozpoznávání běží lokálně na procesoru, ven jde jen rozpoznaný text.</p>
+  </description>
+
+  <launchable type="desktop-id">cz.polyweb.LinuxScreenTranslator.desktop</launchable>
+  <categories>
+    <category>Utility</category>
+    <category>Translation</category>
+  </categories>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-09-05">
+      <description>
+        <p>First release.</p>
+        <p xml:lang="cs">První vydání.</p>
+      </description>
+    </release>
+  </releases>
+</component>

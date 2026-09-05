@@ -1,0 +1,178 @@
+"""Translation backends: DeepL, plus a mock used to test without a key."""
+
+from dataclasses import dataclass
+
+import requests
+
+from .i18n import _
+
+DEEPL_FREE = "https://api-free.deepl.com/v2/translate"
+DEEPL_PRO = "https://api.deepl.com/v2/translate"
+
+# Cheap hints that a block is already in the target language, so that it never
+# reaches the API and never costs quota. Add an entry to support a language.
+#
+# "chars" are letters the language has and English does not. Those alone are
+# not enough: OCR runs an English/Chinese model that tends to swallow
+# diacritics ("Hlavní stránka" comes back as "Hlavni stranka"), so "words"
+# lists common function words that are not also English words — deliberately
+# without the likes of "to", "do" or "a", which mean something else in English.
+TARGET_HINTS = {
+    "CS": {
+        "chars": set("ěščřžůťďňĚŠČŘŽŮŤĎŇ"),
+        "words": {
+            "se", "ze", "nez", "uz", "jak", "kdyz", "ktery", "ktera", "ktere",
+            "jsem", "jsou", "jsme", "jste", "byl", "byla", "bylo", "bude",
+            "budou", "neni", "vas", "vam", "sve", "svuj", "ale", "nebo",
+            "jeste", "pro", "pri", "tak", "protoze", "takze", "podle", "mezi",
+            "proti", "bez", "pred", "nad", "pod", "kde", "kdo", "jako",
+            "vsak", "ted", "vice", "muze", "musi", "chce", "si", "jen",
+            "uzivatel", "uzivatele", "prave", "hlavni", "stranka",
+        },
+    },
+}
+
+
+class TranslationError(RuntimeError):
+    pass
+
+
+@dataclass
+class Translation:
+    """The result for a single block."""
+
+    text: str
+    detected: str = ""      # language the backend detected
+
+    def same_as(self, original):
+        return self.text.strip().casefold() == original.strip().casefold()
+
+
+def base_lang(code):
+    """Turn "EN-GB" into "EN" so languages can be compared."""
+    return (code or "").split("-")[0].upper()
+
+
+def looks_like_target(text, target_lang, min_hits=2):
+    """Cheap guess whether the text already is in the target language.
+
+    This only saves quota; the backend's own detector has the final say on
+    whatever slips through.
+    """
+    hints = TARGET_HINTS.get(base_lang(target_lang))
+    if not hints:
+        return False
+    if any(ch in hints["chars"] for ch in text):
+        return True
+    words = [w.strip(".,:;!?()[]\"'„“").lower() for w in text.split()]
+    return sum(1 for w in words if w in hints["words"]) >= min_hits
+
+
+class DeepLTranslator:
+    def __init__(self, api_key, target_lang="CS", source_lang=""):
+        if not api_key:
+            raise TranslationError(_("No DeepL API key has been set."))
+        self.api_key = api_key
+        self.target_lang = target_lang
+        self.source_lang = source_lang
+        # Free-tier keys end in ":fx" and use a different endpoint.
+        self.endpoint = DEEPL_FREE if api_key.rstrip().endswith(":fx") else DEEPL_PRO
+
+    def translate(self, texts):
+        """Translate a list of strings in one request, preserving order.
+
+        Blocks that already are in the target language are not sent and come
+        back unchanged.
+        """
+        if not texts:
+            return []
+
+        send = [i for i, text in enumerate(texts)
+                if not looks_like_target(text, self.target_lang)]
+        results = [Translation(text=t, detected=base_lang(self.target_lang)) for t in texts]
+        if not send:
+            return results
+
+        data = {"text": [texts[i] for i in send], "target_lang": self.target_lang}
+        if self.source_lang:
+            data["source_lang"] = self.source_lang
+        try:
+            response = requests.post(
+                self.endpoint,
+                headers={"Authorization": f"DeepL-Auth-Key {self.api_key}"},
+                data=data,
+                timeout=30,
+            )
+        except requests.RequestException as exc:
+            raise TranslationError(_("DeepL is unreachable: {error}").format(error=exc)) from exc
+
+        if response.status_code == 403:
+            raise TranslationError(_("DeepL rejected the key (403). Check your API key."))
+        if response.status_code == 456:
+            raise TranslationError(_("The monthly DeepL quota is used up (456)."))
+        if response.status_code != 200:
+            raise TranslationError(
+                _("DeepL returned {status}: {body}").format(
+                    status=response.status_code, body=response.text[:200])
+            )
+
+        for index, item in zip(send, response.json()["translations"]):
+            results[index] = Translation(
+                text=item["text"],
+                detected=base_lang(item.get("detected_source_language", "")),
+            )
+        return results
+
+
+class MockTranslator:
+    """Does not translate, only marks the text — used to exercise the pipeline."""
+
+    def __init__(self, target_lang="CS", **_kwargs):
+        self.target_lang = target_lang
+
+    def translate(self, texts):
+        return [
+            Translation(text=t, detected=base_lang(self.target_lang))
+            if looks_like_target(t, self.target_lang)
+            else Translation(text=f"«{t}»", detected="EN")
+            for t in texts
+        ]
+
+
+def build(cfg, api_key=None):
+    if cfg.get("translator") == "mock":
+        return MockTranslator(target_lang=cfg["target_lang"])
+    return DeepLTranslator(
+        api_key=api_key or cfg.get("deepl_api_key", ""),
+        target_lang=cfg["target_lang"],
+        source_lang=cfg.get("source_lang", ""),
+    )
+
+
+def check_key(api_key):
+    """Verify a key against the /usage endpoint. Returns (ok, message)."""
+    api_key = (api_key or "").strip()
+    if not api_key:
+        return False, _("No key entered.")
+
+    base = DEEPL_FREE if api_key.endswith(":fx") else DEEPL_PRO
+    try:
+        response = requests.get(
+            base.replace("/translate", "/usage"),
+            headers={"Authorization": f"DeepL-Auth-Key {api_key}"},
+            timeout=15,
+        )
+    except requests.RequestException as exc:
+        return False, _("Could not reach DeepL: {error}").format(error=exc)
+
+    if response.status_code == 403:
+        return False, _("DeepL rejected the key (403). Check that you copied all of it.")
+    if response.status_code != 200:
+        return False, _("DeepL returned {status}.").format(status=response.status_code)
+
+    data = response.json()
+    used = f"{data.get('character_count', 0):,}"
+    limit = f"{data.get('character_limit', 0):,}"
+    tier = _("free") if api_key.endswith(":fx") else _("paid")
+    return True, _("Key is valid ({tier} tier) — {used} of {limit} characters used.").format(
+        tier=tier, used=used, limit=limit)

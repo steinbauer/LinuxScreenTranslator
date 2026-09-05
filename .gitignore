@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+*.pyc
+# built from po/ by tools/i18n_tools.py
+locale/
