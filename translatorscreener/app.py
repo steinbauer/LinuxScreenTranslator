@@ -318,15 +318,26 @@ class PreferencesUI:
         self._key.connect("changed", self._on_key_changed)
         group.add(self._key)
 
-        self._check = Gtk.Button(label=_("Verify key"), valign=Gtk.Align.CENTER)
+        self._meter = Gtk.ProgressBar(valign=Gtk.Align.CENTER, width_request=170)
+        self._meter.set_visible(False)
+        self._check = Gtk.Button(icon_name="view-refresh-symbolic",
+                                 valign=Gtk.Align.CENTER,
+                                 tooltip_text=_("Check the key and refresh the quota"))
+        self._check.add_css_class("flat")
         self._check.connect("clicked", self._on_check)
+
         row = Adw.ActionRow(
-            title=_("Key status"),
+            title=_("Monthly quota"),
             subtitle=_("The key is kept in the system keyring, not in the config file."),
         )
+        row.add_suffix(self._meter)
         row.add_suffix(self._check)
         self._status_row = row
         group.add(row)
+
+        # Fill it in on open: how much is left matters before a translation is
+        # attempted, not only when someone thinks to press a button.
+        self._on_check()
         return group
 
     def _behaviour_group(self):
@@ -366,18 +377,29 @@ class PreferencesUI:
             self._cfg["deepl_api_key"] = api_key
         config.save(self._cfg)
 
-    def _on_check(self, _button):
+    def _on_check(self, _button=None):
+        api_key = self._key.get_text().strip()
+        if not api_key:
+            self._meter.set_visible(False)
+            self._status_row.set_subtitle(_("Enter a key to see the remaining quota."))
+            return
+
         self._check.set_sensitive(False)
         self._status_row.set_subtitle(_("Checking…"))
-        api_key = self._key.get_text().strip()
 
         def worker():
-            ok, message = translate.check_key(api_key)
-            GLib.idle_add(finish, ok, message)
+            usage = translate.check_key(api_key)
+            GLib.idle_add(finish, usage)
 
-        def finish(ok, message):
-            self._status_row.set_subtitle(("✅ " if ok else "❌ ") + message)
+        def finish(usage):
             self._check.set_sensitive(True)
+            self._meter.set_visible(usage.ok)
+            if not usage.ok:
+                self._status_row.set_subtitle("❌ " + usage.message)
+                return False
+            self._meter.set_fraction(usage.fraction)
+            warning = "⚠ " if usage.fraction >= 0.9 else ""
+            self._status_row.set_subtitle(warning + usage.message)
             return False
 
         threading.Thread(target=worker, daemon=True).start()

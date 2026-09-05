@@ -69,7 +69,7 @@ msgstr ""
 msgid "Save both"
 msgstr ""
 
-#: translatorscreener/app.py:370
+#: translatorscreener/app.py:388
 msgid "Checking…"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgid "Show the original (hold space)"
 msgstr ""
 
 #: translatorscreener/app.py:80
-#: translatorscreener/app.py:389
+#: translatorscreener/app.py:412
 msgid "Settings"
 msgstr ""
 
@@ -103,48 +103,53 @@ msgstr ""
 msgid "The text found is already in the target language."
 msgstr ""
 
-#: translatorscreener/app.py:303
+#: translatorscreener/app.py:304
 msgid "Translation"
 msgstr ""
 
-#: translatorscreener/app.py:307
+#: translatorscreener/app.py:308
 msgid "Target language"
 msgstr ""
 
-#: translatorscreener/app.py:315
+#: translatorscreener/app.py:316
 msgid "DeepL API key"
 msgstr ""
 
-#: translatorscreener/app.py:320
-msgid "Verify key"
+#: translatorscreener/app.py:325
+msgid "Check the key and refresh the quota"
 msgstr ""
 
-#: translatorscreener/app.py:323
-msgid "Key status"
+#: translatorscreener/app.py:330
+msgid "Monthly quota"
 msgstr ""
 
-#: translatorscreener/app.py:324
+#: translatorscreener/app.py:331
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr ""
 
-#: translatorscreener/app.py:332
+#: translatorscreener/app.py:344
 msgid "Behaviour"
 msgstr ""
 
-#: translatorscreener/app.py:335
+#: translatorscreener/app.py:347
 msgid "Erase the original text"
 msgstr ""
 
-#: translatorscreener/app.py:336
+#: translatorscreener/app.py:348
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr ""
 
-#: translatorscreener/app.py:344
+#: translatorscreener/app.py:356
 msgid "Keep the captures"
 msgstr ""
 
-#: translatorscreener/app.py:345
+#: translatorscreener/app.py:357
 msgid "The desktop saves every capture into your Screenshots folder."
+msgstr ""
+
+#: translatorscreener/app.py:384
+#: translatorscreener/translate.py:179
+msgid "Enter a key to see the remaining quota."
 msgstr ""
 
 #: translatorscreener/app.py:130
@@ -160,7 +165,7 @@ msgstr ""
 msgid "Something went wrong"
 msgstr ""
 
-#: translatorscreener/app.py:284
+#: translatorscreener/app.py:285
 msgid "Saved alongside {path}"
 msgstr ""
 
@@ -168,12 +173,12 @@ msgstr ""
 msgid "Recognised text — {summary}"
 msgstr ""
 
-#: translatorscreener/app.py:274
-#: translatorscreener/app.py:277
+#: translatorscreener/app.py:275
+#: translatorscreener/app.py:278
 msgid "Saved to {path}"
 msgstr ""
 
-#: translatorscreener/app.py:404
+#: translatorscreener/app.py:427
 msgid "Settings — {name}"
 msgstr ""
 
@@ -225,51 +230,47 @@ msgstr ""
 msgid "Translating {count} blocks…"
 msgstr ""
 
-#: translatorscreener/translate.py:176
+#: translatorscreener/translate.py:200
 msgid "free"
 msgstr ""
 
-#: translatorscreener/translate.py:176
+#: translatorscreener/translate.py:200
 msgid "paid"
 msgstr ""
 
-#: translatorscreener/translate.py:156
-msgid "No key entered."
-msgstr ""
-
-#: translatorscreener/translate.py:169
+#: translatorscreener/translate.py:192
 msgid "DeepL rejected the key (403). Check that you copied all of it."
 msgstr ""
 
-#: translatorscreener/translate.py:74
+#: translatorscreener/translate.py:201
+msgid "{used} of {limit} characters used, {left} left ({tier} tier)"
+msgstr ""
+
+#: translatorscreener/translate.py:97
 msgid "No DeepL API key has been set."
 msgstr ""
 
-#: translatorscreener/translate.py:110
+#: translatorscreener/translate.py:133
 msgid "DeepL rejected the key (403). Check your API key."
 msgstr ""
 
-#: translatorscreener/translate.py:112
+#: translatorscreener/translate.py:135
 msgid "The monthly DeepL quota is used up (456)."
 msgstr ""
 
-#: translatorscreener/translate.py:177
-msgid "Key is valid ({tier} tier) — {used} of {limit} characters used."
-msgstr ""
-
-#: translatorscreener/translate.py:171
+#: translatorscreener/translate.py:194
 msgid "DeepL returned {status}."
 msgstr ""
 
-#: translatorscreener/translate.py:115
+#: translatorscreener/translate.py:138
 msgid "DeepL returned {status}: {body}"
 msgstr ""
 
-#: translatorscreener/translate.py:166
+#: translatorscreener/translate.py:189
 msgid "Could not reach DeepL: {error}"
 msgstr ""
 
-#: translatorscreener/translate.py:107
+#: translatorscreener/translate.py:130
 msgid "DeepL is unreachable: {error}"
 msgstr ""
 

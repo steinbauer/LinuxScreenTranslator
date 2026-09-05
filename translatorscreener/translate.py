@@ -37,6 +37,29 @@ class TranslationError(RuntimeError):
     pass
 
 
+def group_digits(number):
+    """1240 -> "1 240". A plain space reads the same in every language."""
+    return f"{number:,}".replace(",", "\u00a0")
+
+
+@dataclass
+class Usage:
+    """What the translation service says about the account's allowance."""
+
+    ok: bool
+    message: str
+    used: int = 0
+    limit: int = 0
+
+    @property
+    def fraction(self):
+        return min(1.0, self.used / self.limit) if self.limit else 0.0
+
+    @property
+    def remaining(self):
+        return max(0, self.limit - self.used)
+
+
 @dataclass
 class Translation:
     """The result for a single block."""
@@ -150,10 +173,10 @@ def build(cfg, api_key=None):
 
 
 def check_key(api_key):
-    """Verify a key against the /usage endpoint. Returns (ok, message)."""
+    """Ask the service how much of the allowance is gone. Never raises."""
     api_key = (api_key or "").strip()
     if not api_key:
-        return False, _("No key entered.")
+        return Usage(False, _("Enter a key to see the remaining quota."))
 
     base = DEEPL_FREE if api_key.endswith(":fx") else DEEPL_PRO
     try:
@@ -163,16 +186,19 @@ def check_key(api_key):
             timeout=15,
         )
     except requests.RequestException as exc:
-        return False, _("Could not reach DeepL: {error}").format(error=exc)
+        return Usage(False, _("Could not reach DeepL: {error}").format(error=exc))
 
     if response.status_code == 403:
-        return False, _("DeepL rejected the key (403). Check that you copied all of it.")
+        return Usage(False, _("DeepL rejected the key (403). Check that you copied all of it."))
     if response.status_code != 200:
-        return False, _("DeepL returned {status}.").format(status=response.status_code)
+        return Usage(False, _("DeepL returned {status}.").format(status=response.status_code))
 
     data = response.json()
-    used = f"{data.get('character_count', 0):,}"
-    limit = f"{data.get('character_limit', 0):,}"
+    used = int(data.get("character_count", 0))
+    limit = int(data.get("character_limit", 0))
+    usage = Usage(True, "", used, limit)
     tier = _("free") if api_key.endswith(":fx") else _("paid")
-    return True, _("Key is valid ({tier} tier) — {used} of {limit} characters used.").format(
-        tier=tier, used=used, limit=limit)
+    usage.message = _("{used} of {limit} characters used, {left} left ({tier} tier)").format(
+        used=group_digits(used), limit=group_digits(limit),
+        left=group_digits(usage.remaining), tier=tier)
+    return usage

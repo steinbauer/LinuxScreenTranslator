@@ -71,7 +71,7 @@ msgstr "Uložit originál"
 msgid "Save both"
 msgstr "Uložit obojí"
 
-#: translatorscreener/app.py:370
+#: translatorscreener/app.py:388
 msgid "Checking…"
 msgstr "Ověřuji…"
 
@@ -80,7 +80,7 @@ msgid "Show the original (hold space)"
 msgstr "Zobrazit původní snímek (podrž mezerník)"
 
 #: translatorscreener/app.py:80
-#: translatorscreener/app.py:389
+#: translatorscreener/app.py:412
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -105,49 +105,54 @@ msgstr "Není co překládat"
 msgid "The text found is already in the target language."
 msgstr "Nalezený text už je v cílovém jazyce."
 
-#: translatorscreener/app.py:303
+#: translatorscreener/app.py:304
 msgid "Translation"
 msgstr "Překlad"
 
-#: translatorscreener/app.py:307
+#: translatorscreener/app.py:308
 msgid "Target language"
 msgstr "Cílový jazyk"
 
-#: translatorscreener/app.py:315
+#: translatorscreener/app.py:316
 msgid "DeepL API key"
 msgstr "DeepL API klíč"
 
-#: translatorscreener/app.py:320
-msgid "Verify key"
-msgstr "Ověřit klíč"
+#: translatorscreener/app.py:325
+msgid "Check the key and refresh the quota"
+msgstr "Ověřit klíč a načíst zbývající limit"
 
-#: translatorscreener/app.py:323
-msgid "Key status"
-msgstr "Stav klíče"
+#: translatorscreener/app.py:330
+msgid "Monthly quota"
+msgstr "Měsíční limit"
 
-#: translatorscreener/app.py:324
+#: translatorscreener/app.py:331
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr "Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru."
 
-#: translatorscreener/app.py:332
+#: translatorscreener/app.py:344
 msgid "Behaviour"
 msgstr "Chování"
 
-#: translatorscreener/app.py:335
+#: translatorscreener/app.py:347
 msgid "Erase the original text"
 msgstr "Vymazat původní text"
 
-#: translatorscreener/app.py:336
+#: translatorscreener/app.py:348
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr "Dopočítá pozadí pod textem. Vypnuté se překlad píše přes originál."
 
-#: translatorscreener/app.py:344
+#: translatorscreener/app.py:356
 msgid "Keep the captures"
 msgstr "Ponechat pořízené snímky"
 
-#: translatorscreener/app.py:345
+#: translatorscreener/app.py:357
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
+
+#: translatorscreener/app.py:384
+#: translatorscreener/translate.py:179
+msgid "Enter a key to see the remaining quota."
+msgstr "Zadej klíč a uvidíš zbývající limit."
 
 #: translatorscreener/app.py:130
 #: translatorscreener/pipeline.py:35
@@ -162,7 +167,7 @@ msgstr "Překlad se nezdařil"
 msgid "Something went wrong"
 msgstr "Něco se pokazilo"
 
-#: translatorscreener/app.py:284
+#: translatorscreener/app.py:285
 msgid "Saved alongside {path}"
 msgstr "Originál uložen jako {path}"
 
@@ -170,12 +175,12 @@ msgstr "Originál uložen jako {path}"
 msgid "Recognised text — {summary}"
 msgstr "Rozpoznaný text — {summary}"
 
-#: translatorscreener/app.py:274
-#: translatorscreener/app.py:277
+#: translatorscreener/app.py:275
+#: translatorscreener/app.py:278
 msgid "Saved to {path}"
 msgstr "Uloženo do {path}"
 
-#: translatorscreener/app.py:404
+#: translatorscreener/app.py:427
 msgid "Settings — {name}"
 msgstr "Nastavení — {name}"
 
@@ -227,51 +232,47 @@ msgstr "{count} bloků za {seconds:.1f} s"
 msgid "Translating {count} blocks…"
 msgstr "Překládám {count} bloků…"
 
-#: translatorscreener/translate.py:176
+#: translatorscreener/translate.py:200
 msgid "free"
 msgstr "bezplatný"
 
-#: translatorscreener/translate.py:176
+#: translatorscreener/translate.py:200
 msgid "paid"
 msgstr "placený"
 
-#: translatorscreener/translate.py:156
-msgid "No key entered."
-msgstr "Klíč není vyplněný."
-
-#: translatorscreener/translate.py:169
+#: translatorscreener/translate.py:192
 msgid "DeepL rejected the key (403). Check that you copied all of it."
 msgstr "DeepL klíč odmítl (403). Zkontroluj, že jsi ho zkopíroval celý."
 
-#: translatorscreener/translate.py:74
+#: translatorscreener/translate.py:201
+msgid "{used} of {limit} characters used, {left} left ({tier} tier)"
+msgstr "využito {used} z {limit} znaků, zbývá {left} ({tier} tarif)"
+
+#: translatorscreener/translate.py:97
 msgid "No DeepL API key has been set."
 msgstr "Není nastavený DeepL API klíč."
 
-#: translatorscreener/translate.py:110
+#: translatorscreener/translate.py:133
 msgid "DeepL rejected the key (403). Check your API key."
 msgstr "DeepL klíč odmítl (403). Zkontroluj API klíč."
 
-#: translatorscreener/translate.py:112
+#: translatorscreener/translate.py:135
 msgid "The monthly DeepL quota is used up (456)."
 msgstr "Vyčerpaný měsíční limit DeepL (456)."
 
-#: translatorscreener/translate.py:177
-msgid "Key is valid ({tier} tier) — {used} of {limit} characters used."
-msgstr "Klíč platí ({tier} tarif) — využito {used} z {limit} znaků."
-
-#: translatorscreener/translate.py:171
+#: translatorscreener/translate.py:194
 msgid "DeepL returned {status}."
 msgstr "DeepL vrátil {status}."
 
-#: translatorscreener/translate.py:115
+#: translatorscreener/translate.py:138
 msgid "DeepL returned {status}: {body}"
 msgstr "DeepL vrátil {status}: {body}"
 
-#: translatorscreener/translate.py:166
+#: translatorscreener/translate.py:189
 msgid "Could not reach DeepL: {error}"
 msgstr "Nepodařilo se spojit s DeepL: {error}"
 
-#: translatorscreener/translate.py:107
+#: translatorscreener/translate.py:130
 msgid "DeepL is unreachable: {error}"
 msgstr "DeepL je nedostupný: {error}"
 
