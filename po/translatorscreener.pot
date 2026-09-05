@@ -5,158 +5,175 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: translatorscreener/app.py:21
+#: translatorscreener/app.py:22
 msgid "Czech"
 msgstr ""
 
-#: translatorscreener/app.py:21
+#: translatorscreener/app.py:22
 msgid "Slovak"
 msgstr ""
 
-#: translatorscreener/app.py:21
+#: translatorscreener/app.py:22
 msgid "English (UK)"
 msgstr ""
 
-#: translatorscreener/app.py:22
+#: translatorscreener/app.py:23
 msgid "English (US)"
 msgstr ""
 
-#: translatorscreener/app.py:22
+#: translatorscreener/app.py:23
 msgid "German"
 msgstr ""
 
-#: translatorscreener/app.py:22
+#: translatorscreener/app.py:23
 msgid "Polish"
 msgstr ""
 
-#: translatorscreener/app.py:23
+#: translatorscreener/app.py:24
 msgid "French"
 msgstr ""
 
-#: translatorscreener/app.py:23
+#: translatorscreener/app.py:24
 msgid "Spanish"
 msgstr ""
 
-#: translatorscreener/app.py:23
+#: translatorscreener/app.py:24
 msgid "Italian"
 msgstr ""
 
-#: translatorscreener/app.py:24
+#: translatorscreener/app.py:25
 msgid "Ukrainian"
 msgstr ""
 
-#: translatorscreener/app.py:24
+#: translatorscreener/app.py:25
 msgid "Portuguese"
 msgstr ""
 
-#: translatorscreener/app.py:24
+#: translatorscreener/app.py:25
 msgid "Dutch"
 msgstr ""
 
-#: translatorscreener/app.py:230
+#: translatorscreener/app.py:239
 msgid "Copied to clipboard"
 msgstr ""
 
-#: translatorscreener/app.py:331
+#: translatorscreener/app.py:244
+msgid "Save translation"
+msgstr ""
+
+#: translatorscreener/app.py:245
+msgid "Save original"
+msgstr ""
+
+#: translatorscreener/app.py:246
+msgid "Save both"
+msgstr ""
+
+#: translatorscreener/app.py:370
 msgid "Checking…"
 msgstr ""
 
-#: translatorscreener/app.py:72
+#: translatorscreener/app.py:73
 msgid "Show the original (hold space)"
 msgstr ""
 
 #: translatorscreener/app.py:80
-msgid "Copy to clipboard (Ctrl+C)"
-msgstr ""
-
-#: translatorscreener/app.py:81
-msgid "Save image… (Ctrl+S)"
-msgstr ""
-
-#: translatorscreener/app.py:82
-#: translatorscreener/app.py:350
+#: translatorscreener/app.py:389
 msgid "Settings"
 msgstr ""
 
-#: translatorscreener/app.py:109
+#: translatorscreener/app.py:85
+msgid "Save… (Ctrl+S)"
+msgstr ""
+
+#: translatorscreener/app.py:92
+msgid "Copy to clipboard (Ctrl+C)"
+msgstr ""
+
+#: translatorscreener/app.py:117
 msgid "Translating…"
 msgstr ""
 
-#: translatorscreener/app.py:154
-#: translatorscreener/app.py:121
+#: translatorscreener/app.py:162
+#: translatorscreener/app.py:129
 msgid "Nothing to translate"
 msgstr ""
 
-#: translatorscreener/app.py:155
+#: translatorscreener/app.py:163
 msgid "The text found is already in the target language."
 msgstr ""
 
-#: translatorscreener/app.py:264
+#: translatorscreener/app.py:303
 msgid "Translation"
 msgstr ""
 
-#: translatorscreener/app.py:268
+#: translatorscreener/app.py:307
 msgid "Target language"
 msgstr ""
 
-#: translatorscreener/app.py:276
+#: translatorscreener/app.py:315
 msgid "DeepL API key"
 msgstr ""
 
-#: translatorscreener/app.py:281
+#: translatorscreener/app.py:320
 msgid "Verify key"
 msgstr ""
 
-#: translatorscreener/app.py:284
+#: translatorscreener/app.py:323
 msgid "Key status"
 msgstr ""
 
-#: translatorscreener/app.py:285
+#: translatorscreener/app.py:324
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr ""
 
-#: translatorscreener/app.py:293
+#: translatorscreener/app.py:332
 msgid "Behaviour"
 msgstr ""
 
-#: translatorscreener/app.py:296
+#: translatorscreener/app.py:335
 msgid "Erase the original text"
 msgstr ""
 
-#: translatorscreener/app.py:297
+#: translatorscreener/app.py:336
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr ""
 
-#: translatorscreener/app.py:305
+#: translatorscreener/app.py:344
 msgid "Keep the captures"
 msgstr ""
 
-#: translatorscreener/app.py:306
+#: translatorscreener/app.py:345
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr ""
 
-#: translatorscreener/app.py:122
+#: translatorscreener/app.py:130
 #: translatorscreener/pipeline.py:35
 msgid "No text was found in the selected area."
 msgstr ""
 
-#: translatorscreener/app.py:125
+#: translatorscreener/app.py:133
 msgid "Translation failed"
 msgstr ""
 
-#: translatorscreener/app.py:128
+#: translatorscreener/app.py:136
 msgid "Something went wrong"
 msgstr ""
 
-#: translatorscreener/app.py:187
+#: translatorscreener/app.py:284
+msgid "Saved alongside {path}"
+msgstr ""
+
+#: translatorscreener/app.py:195
 msgid "Recognised text — {summary}"
 msgstr ""
 
-#: translatorscreener/app.py:243
+#: translatorscreener/app.py:274
+#: translatorscreener/app.py:277
 msgid "Saved to {path}"
 msgstr ""
 
-#: translatorscreener/app.py:365
+#: translatorscreener/app.py:404
 msgid "Settings — {name}"
 msgstr ""
 

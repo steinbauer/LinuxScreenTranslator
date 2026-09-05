@@ -1,6 +1,7 @@
 """Result window and settings (GTK4 / libadwaita)."""
 
 import io
+import os
 import sys
 import threading
 
@@ -76,16 +77,23 @@ class TranslationWindow(Adw.ApplicationWindow):
         header.pack_start(self._compare)
 
         self._buttons = []
-        for icon, tip, handler in (
-            ("edit-copy-symbolic", _("Copy to clipboard (Ctrl+C)"), self._on_copy),
-            ("document-save-symbolic", _("Save image… (Ctrl+S)"), self._on_save),
-            ("emblem-system-symbolic", _("Settings"), self._on_settings),
-        ):
-            button = Gtk.Button(icon_name=icon, tooltip_text=tip)
-            button.connect("clicked", handler)
-            button.set_sensitive(handler is self._on_settings)
-            header.pack_end(button)
-            self._buttons.append(button)
+        settings = Gtk.Button(icon_name="emblem-system-symbolic", tooltip_text=_("Settings"))
+        settings.connect("clicked", self._on_settings)
+        header.pack_end(settings)
+
+        self._save = Gtk.MenuButton(icon_name="document-save-symbolic",
+                                    tooltip_text=_("Save… (Ctrl+S)"),
+                                    menu_model=self._build_save_menu())
+        self._save.set_sensitive(False)
+        header.pack_end(self._save)
+        self._buttons.append(self._save)
+
+        copy = Gtk.Button(icon_name="edit-copy-symbolic",
+                          tooltip_text=_("Copy to clipboard (Ctrl+C)"))
+        copy.connect("clicked", self._on_copy)
+        copy.set_sensitive(False)
+        header.pack_end(copy)
+        self._buttons.append(copy)
 
         # "busy" while the pipeline runs, then either "result" or "status".
         self._stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.CROSSFADE)
@@ -194,7 +202,8 @@ class TranslationWindow(Adw.ApplicationWindow):
     def _install_shortcuts(self):
         controller = Gtk.ShortcutController()
         for accel, callback in (
-            ("<Control>c", self._on_copy), ("<Control>s", self._on_save),
+            ("<Control>c", self._on_copy),
+            ("<Control>s", lambda *_a: self._on_save(what="translation")),
             ("Escape", lambda *_a: self.close()),
         ):
             controller.add_shortcut(Gtk.Shortcut(
@@ -229,20 +238,51 @@ class TranslationWindow(Adw.ApplicationWindow):
         self.get_clipboard().set_texture(self._translated)
         self._toast(_("Copied to clipboard"))
 
-    def _on_save(self, _button):
+    def _build_save_menu(self):
+        """Both the translation and the untouched capture can be kept."""
+        menu = Gio.Menu()
+        menu.append(_("Save translation"), "win.save-translation")
+        menu.append(_("Save original"), "win.save-original")
+        menu.append(_("Save both"), "win.save-both")
+
+        actions = Gio.SimpleActionGroup()
+        for name in ("save-translation", "save-original", "save-both"):
+            action = Gio.SimpleAction.new(name, None)
+            action.connect("activate", self._on_save, name.replace("save-", ""))
+            actions.add_action(action)
+        self._save_actions = actions   # held so it can be inspected and stays alive
+        self.insert_action_group("win", actions)
+        return menu
+
+    def _on_save(self, _action=None, _param=None, what="translation"):
         if self._result is None:
             return
-        dialog = Gtk.FileDialog(initial_name="translated.png")
+        suggested = "original.png" if what == "original" else "translation.png"
+        dialog = Gtk.FileDialog(initial_name=suggested)
 
         def done(source, task):
             try:
                 path = source.save_finish(task).get_path()
             except GLib.Error:
                 return  # cancelled by the user
-            self._result.image.save(path)
-            self._toast(_("Saved to {path}").format(path=path))
+            self._write(path, what)
 
         dialog.save(self, None, done)
+
+    def _write(self, path, what):
+        if what == "original":
+            self._source.save(path)
+            return self._toast(_("Saved to {path}").format(path=path))
+        if what == "translation":
+            self._result.image.save(path)
+            return self._toast(_("Saved to {path}").format(path=path))
+
+        # Both: the chosen name for the translation, and a sibling beside it.
+        root, extension = os.path.splitext(path)
+        companion = f"{root}-original{extension or '.png'}"
+        self._result.image.save(path)
+        self._source.save(companion)
+        return self._toast(_("Saved alongside {path}").format(path=companion))
 
     def _on_settings(self, _button):
         PreferencesDialog().present(self)

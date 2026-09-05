@@ -7,158 +7,175 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: translatorscreener/app.py:21
+#: translatorscreener/app.py:22
 msgid "Czech"
 msgstr "Čeština"
 
-#: translatorscreener/app.py:21
+#: translatorscreener/app.py:22
 msgid "Slovak"
 msgstr "Slovenština"
 
-#: translatorscreener/app.py:21
+#: translatorscreener/app.py:22
 msgid "English (UK)"
 msgstr "Angličtina (UK)"
 
-#: translatorscreener/app.py:22
+#: translatorscreener/app.py:23
 msgid "English (US)"
 msgstr "Angličtina (US)"
 
-#: translatorscreener/app.py:22
+#: translatorscreener/app.py:23
 msgid "German"
 msgstr "Němčina"
 
-#: translatorscreener/app.py:22
+#: translatorscreener/app.py:23
 msgid "Polish"
 msgstr "Polština"
 
-#: translatorscreener/app.py:23
+#: translatorscreener/app.py:24
 msgid "French"
 msgstr "Francouzština"
 
-#: translatorscreener/app.py:23
+#: translatorscreener/app.py:24
 msgid "Spanish"
 msgstr "Španělština"
 
-#: translatorscreener/app.py:23
+#: translatorscreener/app.py:24
 msgid "Italian"
 msgstr "Italština"
 
-#: translatorscreener/app.py:24
+#: translatorscreener/app.py:25
 msgid "Ukrainian"
 msgstr "Ukrajinština"
 
-#: translatorscreener/app.py:24
+#: translatorscreener/app.py:25
 msgid "Portuguese"
 msgstr "Portugalština"
 
-#: translatorscreener/app.py:24
+#: translatorscreener/app.py:25
 msgid "Dutch"
 msgstr "Nizozemština"
 
-#: translatorscreener/app.py:230
+#: translatorscreener/app.py:239
 msgid "Copied to clipboard"
 msgstr "Zkopírováno do schránky"
 
-#: translatorscreener/app.py:331
+#: translatorscreener/app.py:244
+msgid "Save translation"
+msgstr "Uložit překlad"
+
+#: translatorscreener/app.py:245
+msgid "Save original"
+msgstr "Uložit originál"
+
+#: translatorscreener/app.py:246
+msgid "Save both"
+msgstr "Uložit obojí"
+
+#: translatorscreener/app.py:370
 msgid "Checking…"
 msgstr "Ověřuji…"
 
-#: translatorscreener/app.py:72
+#: translatorscreener/app.py:73
 msgid "Show the original (hold space)"
 msgstr "Zobrazit původní snímek (podrž mezerník)"
 
 #: translatorscreener/app.py:80
-msgid "Copy to clipboard (Ctrl+C)"
-msgstr "Kopírovat do schránky (Ctrl+C)"
-
-#: translatorscreener/app.py:81
-msgid "Save image… (Ctrl+S)"
-msgstr "Uložit obrázek… (Ctrl+S)"
-
-#: translatorscreener/app.py:82
-#: translatorscreener/app.py:350
+#: translatorscreener/app.py:389
 msgid "Settings"
 msgstr "Nastavení"
 
-#: translatorscreener/app.py:109
+#: translatorscreener/app.py:85
+msgid "Save… (Ctrl+S)"
+msgstr "Uložit… (Ctrl+S)"
+
+#: translatorscreener/app.py:92
+msgid "Copy to clipboard (Ctrl+C)"
+msgstr "Kopírovat do schránky (Ctrl+C)"
+
+#: translatorscreener/app.py:117
 msgid "Translating…"
 msgstr "Překládám…"
 
-#: translatorscreener/app.py:154
-#: translatorscreener/app.py:121
+#: translatorscreener/app.py:162
+#: translatorscreener/app.py:129
 msgid "Nothing to translate"
 msgstr "Není co překládat"
 
-#: translatorscreener/app.py:155
+#: translatorscreener/app.py:163
 msgid "The text found is already in the target language."
 msgstr "Nalezený text už je v cílovém jazyce."
 
-#: translatorscreener/app.py:264
+#: translatorscreener/app.py:303
 msgid "Translation"
 msgstr "Překlad"
 
-#: translatorscreener/app.py:268
+#: translatorscreener/app.py:307
 msgid "Target language"
 msgstr "Cílový jazyk"
 
-#: translatorscreener/app.py:276
+#: translatorscreener/app.py:315
 msgid "DeepL API key"
 msgstr "DeepL API klíč"
 
-#: translatorscreener/app.py:281
+#: translatorscreener/app.py:320
 msgid "Verify key"
 msgstr "Ověřit klíč"
 
-#: translatorscreener/app.py:284
+#: translatorscreener/app.py:323
 msgid "Key status"
 msgstr "Stav klíče"
 
-#: translatorscreener/app.py:285
+#: translatorscreener/app.py:324
 msgid "The key is kept in the system keyring, not in the config file."
 msgstr "Klíč se ukládá do klíčenky systému, ne do konfiguračního souboru."
 
-#: translatorscreener/app.py:293
+#: translatorscreener/app.py:332
 msgid "Behaviour"
 msgstr "Chování"
 
-#: translatorscreener/app.py:296
+#: translatorscreener/app.py:335
 msgid "Erase the original text"
 msgstr "Vymazat původní text"
 
-#: translatorscreener/app.py:297
+#: translatorscreener/app.py:336
 msgid "Fills in the background underneath. When off, the translation is drawn over the original."
 msgstr "Dopočítá pozadí pod textem. Vypnuté se překlad píše přes originál."
 
-#: translatorscreener/app.py:305
+#: translatorscreener/app.py:344
 msgid "Keep the captures"
 msgstr "Ponechat pořízené snímky"
 
-#: translatorscreener/app.py:306
+#: translatorscreener/app.py:345
 msgid "The desktop saves every capture into your Screenshots folder."
 msgstr "Prostředí ukládá každý záchyt do složky Snímky obrazovky."
 
-#: translatorscreener/app.py:122
+#: translatorscreener/app.py:130
 #: translatorscreener/pipeline.py:35
 msgid "No text was found in the selected area."
 msgstr "Ve vybrané oblasti jsem nenašel žádný text."
 
-#: translatorscreener/app.py:125
+#: translatorscreener/app.py:133
 msgid "Translation failed"
 msgstr "Překlad se nezdařil"
 
-#: translatorscreener/app.py:128
+#: translatorscreener/app.py:136
 msgid "Something went wrong"
 msgstr "Něco se pokazilo"
 
-#: translatorscreener/app.py:187
+#: translatorscreener/app.py:284
+msgid "Saved alongside {path}"
+msgstr "Originál uložen jako {path}"
+
+#: translatorscreener/app.py:195
 msgid "Recognised text — {summary}"
 msgstr "Rozpoznaný text — {summary}"
 
-#: translatorscreener/app.py:243
+#: translatorscreener/app.py:274
+#: translatorscreener/app.py:277
 msgid "Saved to {path}"
 msgstr "Uloženo do {path}"
 
-#: translatorscreener/app.py:365
+#: translatorscreener/app.py:404
 msgid "Settings — {name}"
 msgstr "Nastavení — {name}"
 
